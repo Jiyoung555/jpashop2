@@ -1,0 +1,60 @@
+{{>head}}
+
+
+<div class="signUpForm">
+    <p>회원 가입</p>
+
+    <form>
+        <div class="form-group">
+            <label>이메일</label>
+            <input class="form-control" id="join-email" type="email"><!--이메일 입력-->
+            <input type="button" class="idCheck_btn" value="중복체크"> <!--idCheck.js / jQuery사용하니, header footer 수정 필수!!-->
+        </div>
+
+        <div class="text-center small mt-2" id="checkMsg" style="color: red"> <!--idCheck.js-->
+        </div>
+
+        <div class="form-group">
+            <label>비밀번호</label>
+            <input class="form-control"id="join-pwd" type="password">
+        </div>
+
+        <div class="form-group">
+            <label>이름</label>
+            <input class="form-control"id="join-name" type="text">
+        </div>
+
+        <input type="hidden" id="join-role" value="member"><!--role 기본값 member로 제출-->
+
+
+        <div class="zipNum">
+            <label>우편번호</label>
+            <input placeholder="우편번호" name="zip_num" id="zip_num" type="text" onclick="execPostCode()" readonly="readonly" >
+            <button type="button" class="btn btn-dark" onclick="execPostCode()">우편번호 찾기</button> <!-- script 이동 -->
+        </div>
+
+        <div class="addr">
+            <label>주소</label>
+            <input placeholder="도로명 주소" name="addr1" id="addr1" type="text" onclick="execPostCode()" readonly="readonly" />
+            <input placeholder="상세주소" name="addr2" id="addr2" type="text" />
+        </div>
+
+        <button class="btn btn-primary" type="button" id="join-btn">제출</button>
+    </form>
+</div>
+
+<script src = "/js/app/common/idCheck.js"></script>
+<script src = "/js/app/common/address.js"></script>
+<script src = "/js/app/common/account.js"></script>
+
+
+<!-- 다음 우편주소 API -->
+<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+
+{{>footer}}
+
+
+
+
+
+
