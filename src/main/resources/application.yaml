@@ -1,25 +1,63 @@
 spring:
-  h2: #기존에 적었던 코드네요. 참고로, devtools 라이브러리 설치시, 이 3줄은 안 적어도 됨
+  h2:  #기존에 적었던 코드네요. 참고로, devtools 라이브러리 설치시, 이 3줄은 안 적어도 됨
     console:
       enabled: true
 
-  # 여러줄 주석처리 : 전체 드래그후, ctrl /
-  #  datasource:
-  #    url: jdbc:h2:tcp://localhost/~/jpashop
-  #    usersname: sa
-  #    password:
-  #    driver-class-name: org.h2.Driver
-  #
+  mustache: #session 등록시, {{어쩌구}} 이렇게 뷰에 보이도록
+    expose-session-attributes: true
+
+  #여기부터 새로 추가 (DB 영구 저장)
+  datasource:
+    url: jdbc:h2:tcp://localhost/~/jpashop2
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
+
   jpa:
     hibernate:
-      ddl-auto: create # 영구 디비를 원할 시, none
+      ddl-auto: none
+      #none: 테이블 자동생성 x
+      #create: 엔티티 클래스대로 DB에 테이블 생성 (서버 재시작시, 다 지우고 다시 생성)
+      #update: 엔티티 클래스대로 DB에 테이블 생성. 엔티티 클래스 바뀐 거 있으면, 테이블 수정
+      #1.update로 테이블 생성후 2.none으로 수정함 (아니면 에러남)
     properties:
       hibernate:
-        format_sql: true
+        #show_sql: true # 주석처리 (print 형식이기 때문)
+        format_sql: true #보기 좋게 문단 나눠서 출력해줘
+    database-platform: org.hibernate.dialect.PostgreSQLDialect #없이 해보고, 아래 에러 나면 추가하세요
+    #Caused by: org.hibernate.service.spi.ServiceException: Unable to create requested service [org.hibernate.engine.jdbc.env.spi.JdbcEnvironment]
+    #Caused by: org.hibernate.HibernateException: Access to DialectResolutionInfo cannot be null when 'hibernate.dialect' not set
 
 
 logging:
   level:
     org.hibernate.SQL: debug
-    org.hibernate.type: trace
+    org.hibernate.type: trace #로그에 물음표로 나오는 파라미터 확인하기
+
+
+
+#spring:
+#  h2: #기존에 적었던 코드네요. 참고로, devtools 라이브러리 설치시, 이 3줄은 안 적어도 됨
+#    console:
+#      enabled: true
+#
+#  # 여러줄 주석처리 : 전체 드래그후, ctrl /
+#  #  datasource:
+#  #    url: jdbc:h2:tcp://localhost/~/jpashop
+#  #    username: sa
+#  #    password:
+#  #    driver-class-name: org.h2.Driver
+#  #
+#  jpa:
+#    hibernate:
+#      ddl-auto: create
+#    properties:
+#      hibernate:
+#        format_sql: true
+#
+#
+#logging:
+#  level:
+#    org.hibernate.SQL: debug
+#    org.hibernate.type: trace
 

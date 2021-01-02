@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import javax.servlet.http.HttpSession;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -26,7 +27,7 @@ public class MemberController {
         return "signup";
     }
 
-    /*
+
     //로그인 form 화면
     @GetMapping("/login")
     public String loginPage() {
@@ -38,7 +39,7 @@ public class MemberController {
         httpSession.invalidate(); //세션 삭제
         return "redirect:/sone"; //view 필요 없음
     }
-*/
+
     //회원가입, 로그인 form 제출 -> api
 
 }

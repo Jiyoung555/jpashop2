@@ -1,0 +1,91 @@
+.noticeShow-label{
+    margin-top: 15px;
+    margin-bottom: 15px;
+    margin-left: 120px;
+    margin-right: 120px;
+}
+
+.noticeShow-label h4{
+    /*font-family: arial;*/
+    font-weight: bold;
+    color: rgb(119, 119, 119);
+}
+
+.noticeShow-table{
+    display: flex;
+    justify-content: center; /*안에 table을 가운데 정렬하고 싶으면, table이 아닌, 이를 담는 container를 가운데 정렬해야 됨*/
+}
+
+.noticeShow-table .table{
+    width: 85%;
+}
+
+.noticeShow-table .table img{
+    max-width: 400px;
+    max-height: 500px;
+}
+
+
+/*---------------------
+  수정/삭제 버튼
+-----------------------*/
+
+.noticeShow-btns {
+    margin-top: 35px;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: flex-end;
+    width: 92%;
+}
+
+
+
+.noticeShow-btns .btn-list{
+    display: block;
+    float: right;
+
+    padding-top: 1px;
+    padding-bottom: 1px;
+
+    /*font-family: arial;*/
+    font-size: 1rem;
+    color: #777;
+
+    border: 1px solid #777;
+    border-radius: 4px;
+    padding-left: 8px;
+    padding-right: 8px;
+    margin-right: 5px; /* 버튼 간 간격 */
+    background-color: #f5f5f5;
+}
+
+.noticeShow-btns .btn-edit{
+    padding-top: 1px;
+    padding-bottom: 1px;
+
+    /*font-family: arial;*/
+    font-size: 1rem;
+    color: #777;
+
+    border: 1px solid #777;
+    border-radius: 4px;
+    padding-left: 8px;
+    padding-right: 8px;
+    margin-right: 5px; /* 버튼 간 간격 */
+    background-color: #f5f5f5;
+}
+
+.noticeShow-btns #notice-destroy-btn{
+    padding-top: 1px;
+    padding-bottom: 1px;
+
+    font-size: 1rem;
+    color: red;
+
+    border: 1px solid #777;
+    border-radius: 4px;
+    padding-left: 8px;
+    padding-right: 8px;
+    background-color: #f5f5f5;
+}
+

@@ -1,0 +1,163 @@
+.talkList{
+    padding-bottom: 100px; /*이거 안하면, footer fixed 때문에 겹침*/
+}
+
+
+/*top*/
+
+.talk-top{
+    /*background-color: #ff4d81;*/
+    height: 500px;
+    margin-top: 15px;
+    margin-bottom: 50px;
+}
+
+.talk-top-inner{
+    display: flex;
+    justify-content: center;
+
+    margin-left: 120px;
+    margin-right: 120px;
+}
+
+.talk-top img{
+      /* 이미지 비율 유지하면서, 최대 크기 정해주기*/
+      width: auto; height: auto;
+      max-height: 500px;
+}
+
+/*
+.top {
+    background-color: #ff4d81;
+    background-repeat: no-repeat;
+    background-position: center;
+	height: 314px;
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-align: center;
+	-ms-flex-align: center;
+	align-items: center;
+	padding-left: 30px;
+	margin-bottom: 10px;
+}
+
+.top_text a:after {   a태그의 밑줄 역할인 듯. 구글링하여 연구하기(css :after)
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	height: 2px;
+	width: 100%;
+	background: #f09e9e;
+	content: "";
+}
+*/
+
+.talk-label{
+    margin-left: 120px;
+    margin-right: 120px;
+    margin-bottom: 15px;
+}
+
+.talk-label h4{
+    /*font-family: arial;*/
+    font-weight: bold;
+    color: rgb(119, 119, 119);
+}
+
+/*---------------------
+  중간
+  글꼴 참고 : 돋움, Dotum, verdana,
+-----------------------*/
+
+/*
+.btn{
+    border: 2px solid pink;
+    border-radius: 10px;
+    font-size: 14px;
+    color: #111111;
+    text-transform: uppercase;
+    font-weight: 600;
+    position: relative;
+    padding: 4 0 5px;
+    display: inline-block;
+
+    margin-bottom: 20px;
+    margin-left: 10
+
+    display: flex;
+    justify-content: flex-end;
+}
+*/
+
+.talk-mid{
+    margin-left: 120px;
+    margin-right: 120px;
+}
+
+.talk-mid .table .th_1{
+    width: 10%; /*번호 부분-테이블 가로길이*/
+}
+.talk-mid .table .th_2{
+    width: 20%; /*작성일 부분-테이블 가로길이*/
+}
+.talk-mid .table .th_4{
+    width: 10%; /*삭제버튼 부분-테이블 가로길이*/
+    color: red;
+}
+.talk-mid .table .th_5{
+    width: 10%; /*체크박스 부분-테이블 가로길이*/
+    color: red;
+}
+
+.talk-mid #talk-destroy-adminBtn{
+    font-weight: bold; /*삭제하기 버튼*/
+}
+
+.talk-table-link{
+    color: black;
+    font-size: 15px;
+}
+
+
+/* 하단부 */
+.talkList_btns{
+    margin-left: 120px;
+    margin-right: 120px;
+    display: flex;
+    justify-content: flex-end;
+    /*width: 92%;*/
+}
+
+
+.talkList_btns .goTalkFormBtn{
+    padding-top: 1px;
+    padding-bottom: 1px;
+    font-size: 1rem;
+    color: #777;
+    border: 2px solid #777;
+    border-radius: 4px;
+    padding-left: 8px;
+    padding-right: 8px;
+    margin-right: 10px;
+    background-color: #f5f5f5;
+}
+
+.talkList_btns .createIcon { font-size: 11px; }
+
+.talkList_btns .talkDeleteBtn{
+    padding-top: 1px;
+    padding-bottom: 1px;
+    font-size: 1rem;
+    color: #777;
+    border: 2px solid #777;
+    border-radius: 4px;
+    padding-left: 8px;
+    padding-right: 8px;
+    background-color: #f5f5f5;
+}
+
+
+
+
+

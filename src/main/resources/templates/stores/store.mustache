@@ -1,0 +1,79 @@
+{{>head}}
+
+<div class="container-fruid store-con">
+    <div class="row">
+
+        <!-- 왼 : 메뉴 -->
+        <div class="col-3">
+            <nav class="navbar navbar-expand-lg navbar-light">
+
+                <!-- <a class="navbar-brand" href="#">Navbar</a> -->
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav flex-column">
+
+                        <li class="nav-item active nav-top-label">
+                            <a class="nav-link" href="#">PRODUCT <span class="sr-only">(current)</span></a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">MUSIC</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">CONCERT</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">PHOTO</a>
+                        </li>
+
+                        <!--<li class="nav-item">
+                            <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+                        </li> -->
+                    </ul>
+                </div>
+
+            </nav>
+        </div> <!-- end col-3-->
+
+
+
+        <!-- 오른쪽 : 상품 진열 -->
+        <div class="col-9 store-items">
+            <div class="row store-line1">
+
+                {{#itemList}}
+                <div class="col-4">
+                    <div class="store-thumbnail">
+                        <a href="/store/{{id}}">
+                            <img src="/uploads2/{{imagename}}" alt="">
+                        </a>
+                    </div>
+
+                    <div class="store-name">
+                        <a href="/store/{{id}}">
+                        <span>{{name}}</span>
+                        <i class="btn material-icons">pageview</i>
+                    </a>
+                    </div>
+
+                    <div class="store-price">
+                        <a href="/store/{{id}}">₩ {{price}}</a>
+                    </div>
+                </div>
+                {{/itemList}}
+
+            </div> <!-- 1줄 row 끝-->
+
+        </div> <!-- end col-9-->
+    </div> <!-- end row-->
+</div> <!-- end container-->
+
+
+
+{{>footer}}

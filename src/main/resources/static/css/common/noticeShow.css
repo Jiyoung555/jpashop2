@@ -1,0 +1,39 @@
+.noticeShow-label{
+    margin-top: 15px;
+    margin-bottom: 15px;
+    margin-left: 120px;
+    margin-right: 120px;
+}
+
+.noticeShow-label h4{
+    /*font-family: arial;*/
+    font-weight: bold;
+    color: rgb(119, 119, 119);
+}
+
+.noticeShow-table{
+    display: flex;
+    justify-content: center; /*안에 table을 가운데 정렬하고 싶으면, table이 아닌, 이를 담는 container를 가운데 정렬해야 됨*/
+}
+
+.noticeShow-table .table{
+    width: 85%;
+}
+
+.noticeShow-table .table img{
+    max-width: 400px;
+    max-height: 500px;
+}
+
+
+/*------버튼--------*/
+
+.noticeShow-btn {
+    display: flex;
+    justify-content: center;
+
+}
+
+.noticeShow-btn a{
+    width: 80%;
+}

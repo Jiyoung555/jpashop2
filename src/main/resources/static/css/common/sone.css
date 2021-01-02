@@ -1,0 +1,108 @@
+
+
+/*---------------------
+  Categories
+-----------------------*/
+
+.categories {
+	overflow: hidden;
+	margin-top: 10px;
+}
+
+.categories .container-fluid {
+	padding-right: 5px;
+}
+
+.categories__item {
+	height: 314px;
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-align: center;
+	-ms-flex-align: center;
+	align-items: center;
+	padding-left: 30px;
+	margin-bottom: 10px;
+	margin-right: 10px;
+}
+
+.categories__item.categories__large__item {
+	height: 638px;
+	padding-left: 70px;
+}
+
+.categories__item.categories__large__item .categories__text {
+	max-width: 480px;
+}
+
+.categories__item.categories__large__item .categories__text p {
+	margin-bottom: 15px;
+}
+
+.categories__text h1 {
+	font-family: "Cookie", cursive; /* 궁서체스러움 */
+	color: #111111;
+	margin-bottom: 5px;
+}
+
+.categories__text h4 {
+	color: #111111;
+	font-weight: 700;
+}
+
+.categories__text p {
+	margin-bottom: 10px;
+}
+
+.categories__text a {
+	font-size: 14px;
+	color: #111111;
+	text-transform: uppercase;
+	font-weight: 600;
+	position: relative;
+	padding: 0 0 3px;
+	display: inline-block;
+}
+
+.categories__text a:after {
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	height: 2px;
+	width: 100%;
+	background: #ca1515;
+	content: "";
+}
+
+/* index.mustache 중 4분할 배경색상 */
+.set-bg-1{
+      background-image: url('/img/index/tae.jpg');
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: 50%;
+     /*background: #FFFFFF;*/
+}
+.set-bg-2{
+  background-image: url('/img/index/yoona.png');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 50%;
+  /*background: #F9D9E3;*/
+}
+.set-bg-3{
+  background-image: url('/img/index/tiff.png');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 50%;
+  /*background: #F9D9E3 ;*/
+}
+.set-bg-4{
+  background-image: url('/img/index/hyo.jpg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 50%;
+  /*background: #FFFFFF;*/
+}
+
+
+

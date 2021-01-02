@@ -1,0 +1,49 @@
+{{>head}}
+
+{{#item}}
+<div class="container-fruid storeShow">
+    <div class="row storeShow_upper">
+        <div class="col-9">
+            <img src="/uploads2/{{imagename}}" alt="">
+        </div>
+
+        <div class="col-3">
+            <form>
+                <p id="item_name">{{name}}</p>
+                <p id="orderPrice">{{price}}</p>
+
+                <hr>
+
+                수량
+                <select id="count" name = "count" size = "1">
+                    <option value = "1"> 1
+                    <option value = "2"> 2
+                    <option value = "3"> 3
+                </select>
+
+                <hr>
+
+                <p>총 금액 </p>
+
+                <input id="item_id" type="hidden" value="{{item_id}}">
+                <input id="account_id" type="hidden" value="{{loginId}}">
+                <!--로그인 id넘버. 세션. 비로그인시 에러남남-->
+
+                <button type="button" id="store_cart_btn">장바구니</button>
+                <button type="button" id="store_order_btn">구매하기</button>
+            </form>
+        </div>
+
+    </div><!--end storeShow_upper-->
+
+    <div class="row storeShow_bottom">
+
+    </div><!--end storeShow_bottom-->
+
+</div><!--end container-->
+{{/item}}
+
+<!--장바구니, 구매하기-->
+<script src = "/js/app/common/store_common.js"></script>
+
+{{>footer}}

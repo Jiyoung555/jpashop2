@@ -1,6 +1,8 @@
 package com.example.jpashop2.controller;
 
+import com.example.jpashop2.domain.Address;
 import com.example.jpashop2.domain.Member;
+import com.example.jpashop2.dto.MemberForm;
 import com.example.jpashop2.repository.MemberRepository;
 import com.example.jpashop2.service.MemberService;
 import lombok.RequiredArgsConstructor;
@@ -36,24 +38,30 @@ public class AccountApiController {
 
     //회원가입 form 제출
     @PostMapping("/api/signup")
-    public Long signUpSubmit(@RequestBody Member member) {
+    public Long signUpSubmit(@RequestBody MemberForm memberForm) {
+        System.out.println("memberForm : " + memberForm);
+
+        Member member = memberForm.toMember();
+        Address address = memberForm.toAddress();
+        member.setAddress(address);
+        System.out.println("member : " + member);
+
         return memberService.join(member);
         //service 안 거치고, 바로 repository 직행하면 에러남
         //에러: No EntityManager with actual transaction available for current thread - cannot reliably process 'persist' call
         //return memberRepository.save(member); //이렇게 리파지터리 직행 x
     }
 
-    /*
+
     //로그인 form 제출
     @PostMapping("/api/login")
-    public String loginAuth(@RequestBody LoginForm form, HttpSession httpSession) {
-        //Account logined = accountService.login(form, httpSession);
-        //return logined.getId();
-        String result = accountService.login(form, httpSession);
+    public String loginAuth(@RequestBody MemberForm memberForm, HttpSession httpSession) {
+        log.info("memberForm : " + memberForm);
+        String result = memberService.login(memberForm, httpSession);
         return result;
     }
 
-     */
+
 
 
 

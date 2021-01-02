@@ -1,0 +1,85 @@
+{{>head}}
+
+<div class="storeForm-label">
+    <h4>상품 등록</h4>
+</div>
+
+<!--js 없이 상품등록-->
+<form class="container"
+    method="post" action="/admin/store" enctype="multipart/form-data">
+
+    <div class="form-group">
+        <label>상품명</label>
+        <input type="text" class="form-control" id="item-name" name="name"> <!--id값 필요x / js 안 씀-->
+    </div>
+
+    <div class="form-group">
+        <label>가격</label>
+        <input type="text" class="form-control" id="item-price" name="price">
+    </div>
+
+    <div class="form-group">
+        <label>재고수량</label>
+        <input type="text" class="form-control" id="item-quantity" name="stockQuuantity">
+    </div>
+
+    <!----------------------------------->
+
+    <!-- 수량 선택 -->
+    <div class="form-group">
+        <label>분류</label>
+        <select name = "sort" size = "1">
+            <option value = "book"> Book
+            <option value = "album"> Album
+            <option value = "movie"> Movie
+        </select>
+    </div>
+
+
+    <div class="form-group">
+        <label>Book 작가</label>
+        <input type="text" class="form-control" id="item-author" name="author">
+    </div>
+
+    <div class="form-group">
+        <label>Book 타입</label>
+        <input type="text" class="form-control" id="item-type" name="type">
+    </div>
+
+    <div class="form-group">
+        <label>Album 아티스트</label>
+        <input type="text" class="form-control" id="item-artist" name="artist">
+    </div>
+
+    <div class="form-group">
+        <label>Album 장르</label>
+        <input type="text" class="form-control" id="item-genre" name="genre">
+    </div>
+
+    <div class="form-group">
+        <label>Movie 감독</label>
+        <input type="text" class="form-control" id="item-director" name="director">
+    </div>
+
+    <div class="form-group">
+        <label>Movie 배우</label>
+        <input type="text" class="form-control" id="item-actor" name="actor">
+    </div>
+
+
+    <div class="form-group">
+        <label>첨부파일</label>
+        <br>
+        <input type="file" id="image" name="image">
+        <a href="#" class="btn" id="delete_file_btn">파일 삭제</a>
+    </div>
+
+    <button type="submit" class="btn btn-primary" id="item-create-btn">등록</button>
+    <!--type submit / js 안 씀-->
+</form>
+
+
+
+<script src="/js/app/admin/store.js"></script>
+
+{{>footer}}

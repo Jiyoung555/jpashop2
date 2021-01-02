@@ -1,11 +1,12 @@
 package com.example.jpashop2.service;
 import com.example.jpashop2.domain.Member;
+import com.example.jpashop2.dto.MemberForm;
 import com.example.jpashop2.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 /*
@@ -58,4 +59,48 @@ public class MemberService {
         return memberRepository.findOne(memberId);
     }
 
+
+    //==========================================
+
+    //로그인
+    //@Transactional(readOnly = true)//위로 뺌
+    public String login(MemberForm form, HttpSession httpSession) {//1.form -> dto
+        //2.해당 회원 있는지
+        List<Member> memberList = memberRepository.findByEmail(form.getEmail());
+        System.out.println("memberList 길이 : " + memberList.size());
+
+        //3-1.회원이면
+        if (memberList.size() != 0) {
+            Member member = memberList.get(0);
+            System.out.println("member : " + member);
+
+            if (form.getPassword().equals(member.getPassword())) {//패스워드 일치시
+                //세션 등록
+                httpSession.setAttribute("loginEmail", member.getEmail());
+                httpSession.setAttribute("loginId", member.getId());
+
+                //어드민 계정이면, 세션 또 등록
+                if (member.getRole().equals("admin")) {
+                    httpSession.setAttribute("admin", member.getRole());
+                }
+                return "loginSuccess";
+
+            } else { //패스워드 틀리면
+                return "wrongPwd";
+            }
+
+        } else {//비회원이면
+            return "noMember";
+        }//end if~else
+
+    }//end login-method
+
+
+
+
+
 }
+
+
+
+

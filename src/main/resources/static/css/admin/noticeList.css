@@ -1,0 +1,82 @@
+/*---------------------
+  top
+-----------------------*/
+
+.notice-label{
+    margin-left: 120px;
+    margin-right: 120px;
+    margin-bottom: 15px;
+}
+
+.notice-label h4{
+    /*font-family: arial;*/
+    font-weight: bold;
+    color: rgb(119, 119, 119);
+}
+
+
+/* 버튼 */
+
+.notice-btn{
+    margin-bottom: 25px;
+    margin-top: 20px;
+    margin-left: 120px;
+    margin-right: 120px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.notice-btn a{
+    padding-top: 1px;
+    padding-bottom: 1px;
+
+    font-size: 1rem;
+    color: #777;
+
+    border: 2px solid #777;
+    border-radius: 4px;
+    padding-left: 8px;
+    padding-right: 8px;
+    /*margin-right: 5px; 버튼 간 간격 */
+    background-color: #f5f5f5;
+}
+
+.notice-btn .material-icons { font-size: 11px; }
+
+
+/*---------------------
+        테이블
+-----------------------*/
+.notice-mid {
+    margin-left: 120px;
+    margin-right: 120px;
+}
+
+/* 이거 하니까 테이블 크기 줄어듦 -_-
+.notice-mid table{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+*/
+
+
+.notice-mid table .num{
+    width: 190px;
+}
+
+.notice-mid table .time{
+    width: 280px;
+}
+
+.notice-mid a{
+    color: black;
+}
+
+
+.notice-mid img{
+    max-width: 100px;
+    max-height: 100px;
+}
+
+

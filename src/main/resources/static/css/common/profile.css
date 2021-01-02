@@ -1,0 +1,180 @@
+/*-------------------------------
+    Profile 윗 부분
+-------------------------------*/
+
+.profile-top{
+    /*width: 95%;*/
+    margin-left: 12%;
+    margin-right: 12%;
+}
+
+/* 왼쪽 - Profile */
+
+.profile-top-left{
+    margin-top: 10px;
+}
+
+.profile-top-left h3{
+    /*font-family: arial;*/
+    font-weight: bold;
+    font-color: #000000E6;
+
+    margin-left: 13px;
+}
+
+.profile-top-left h4{
+    /*font-family: arial;*/
+    font-color: rgb(119, 119, 119);
+}
+
+.profile-top-left ul{
+    list-style:none;
+    /*
+    font-size: 14px;
+    margin-top: 10px;
+    */
+}
+
+
+.profile-top-left ul li::before{ /*li 다 선택한 다음에, li의 앞쪽에 뭔가 넣겠다 => li::before*/
+    content: "\2022";
+    /* color: red; */
+    color: #777;
+    font-weight: bold;
+    display: inline-block;
+
+    width: 1em;
+    margin-left: -1em;
+}
+
+/*
+li{
+    font-color: #504f4f;
+}
+
+li .li-title{
+    font-color: #777;
+}
+*/
+
+/* 오른쪽 - Music Video */
+
+.profile-top-right h5{
+    /*font-family: arial;*/
+    font-weight: bold;
+    font-color: #000000E6;
+}
+
+.class-mv a{
+    /*font-family: arial;*/
+    font-size: 13px;
+    color: #777;
+}
+
+.class-mv .col-6{
+    margin-top: 10px;
+}
+
+
+.class-mv .date{
+    font-size: 12px;
+    color: #ababab;
+}
+
+
+/*-------------------------------
+    Profile 아래 부분
+-------------------------------*/
+
+.profile-bot{
+    margin-top: 70px;
+    margin-left: 12%;
+    margin-right: 12%;
+}
+
+
+
+/* 왼쪽 - Members */
+.profile-bot-left p:nth-child(1){
+    margin-bottom: 2%;
+}
+
+.profile-bot-left h5{
+    /*font-family: arial;*/
+    font-weight: bold;
+    font-color: #000000E6;
+
+    margin-left: 13px;
+}
+
+.class-members{
+    width: 70%;
+}
+
+.class-members .col-3 {
+    display: flex;
+    flex-direction: column; /*주축을 세로로 하겠다*/
+    align-items: center;
+}
+
+.class-members .col-3 .mem-img{
+    width: 90px;
+    height: 90px;
+}
+
+.class-members .col-3 p:nth-child(2) {
+    /*font-family: arial;*/
+    font-size: 13px;
+    color: #777;
+
+    margin-top: 12px;
+    line-height: 5px; /*p 태그는 margin-bottom이 많이 잡혀있음. 행간 줄이기 */
+}
+
+.class-members .col-3 p:nth-child(3) {
+    /*font-family: arial;*/
+    font-size: 13px;
+    color: #777;
+
+    line-height: 5px;
+}
+
+
+/*-- 모달 부분 --*/
+.modal-dialog{
+    max-width: 630px; /*모달창 가로 길이*/
+}
+
+.modal .media{
+    display: flex;
+    align-items: center;
+}
+
+.modal .media .modal-img-members{
+    margin-left: 5%;
+    width: auto; height: auto;
+    max-width: 700px;
+    max-height: 700px;
+}
+
+.modal .media-body{
+    margin-left: 7%;
+}
+
+
+/* 오른쪽 - photo */
+
+.profile-bot-right h5{
+    /*font-family: arial;*/
+    font-weight: bold;
+    font-color: #000000E6;
+}
+
+.class-photo div{
+    margin-top: 10px;
+}
+
+.class-photo img{
+    width-max: 98px;
+    height-max: 98px;
+}

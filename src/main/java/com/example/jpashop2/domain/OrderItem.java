@@ -49,9 +49,9 @@ public class OrderItem {
     }
 
 
-    //**주문 상품의 총 가격 (@.모르겠음)
+    //**주문 상품의 총 가격 (@@내가 개수로 바꿈)
     public int getTotalPrice() {
-        return getOrderPrice() * getTotalPrice(); //주문 가격 x 개수
+        return getOrderPrice() * getCount(); //주문 가격 x 개수
     }
 
 }

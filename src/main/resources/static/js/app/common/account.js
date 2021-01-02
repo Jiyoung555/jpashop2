@@ -36,6 +36,14 @@ var account = {
       addr2: document.querySelector('#addr2').value,
     };
 
+    console.log(data.email);
+    console.log(data.password);
+    console.log(data.name);
+    console.log(data.role);
+    console.log(data.zipcode);
+    console.log(data.addr1);
+    console.log(data.addr2);
+
     fetch('/api/signup', { //action="/signup"
       method: 'POST',
       body: JSON.stringify(data),
@@ -83,7 +91,7 @@ var account = {
                 }
                 if(aaa == 'loginSuccess') {
                   alert('로그인 성공');
-                  window.location.href='/sone';
+                  window.location.href='/login'; //일단 새로고침
                 }
             })
 

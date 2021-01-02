@@ -1,0 +1,26 @@
+{{>head}}
+
+<div class="loginForm">
+    <p>로그인</p>
+
+    <form>
+        <div class="form-group">
+            <label>이메일</label>
+            <input class="form-control" name="email" id="login-email" type="email">
+        </div>
+
+        <div class="form-group">
+            <label>비밀번호</label>
+            <input class="form-control" name="password" id="login-pwd" type="password">
+        </div>
+
+        <!-- ★ (나중에?? 확인중..) 스프링 시큐리티 보안 처리용 입력 값 -->
+        <input type="hidden" name="_csrf" value="{{#_csrf}}token{{/_csrf}}">
+
+        <button class="btn btn-primary" type="button" id="login-btn">제출</button>
+    </form>
+</div>
+
+<script src = "/js/app/common/account.js"></script>
+
+{{>footer}}

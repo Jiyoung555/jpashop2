@@ -1,6 +1,6 @@
 package com.example.jpashop2.domain;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
+
 import javax.persistence.Embeddable;
 
 @Embeddable
@@ -9,6 +9,10 @@ import javax.persistence.Embeddable;
 //이 Address 클래스가 하나의 객체처럼 묶여서, Member 엔티티에 들어가짐
 @Getter
 @Setter
+@ToString//여기부터 내가 추가함.. 테스트
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class Address {
     //private String city;
     //private String street;
