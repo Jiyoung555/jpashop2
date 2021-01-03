@@ -34,4 +34,72 @@
     <script src="https://cdn.jsdelivr.net/npm/jdenticon@3.0.1" async></script>
     <title>Hello, world!</title>
 </head>
+
+
 <body>
+    <!-- navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light headNav">
+
+        <a class="navbar-brand" href="/sone">S♡NE</a>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+            <ul class="navbar-nav mr-auto"> <!--mr-auto : 오른쪽 마진 줘라 -->
+                <li class="nav-item">
+                    <a class="nav-link" href="/profile">Profile</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="/notice">Notice</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="/store">MD Store</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="/talk">Fan Talk</a>
+                </li>
+
+                {{#loginEmail}} <!--세션 o -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="/mypage">Mypage</a>
+                    </li>
+                {{/loginEmail}}
+            </ul>
+
+            <ul class="navbar-nav ml-auto"> <!--오른쪽에 붙이기 -->
+                {{#admin}} <!--어드민 로그인시-->
+                    <li class="nav-item">
+                        <a class="nav-link" href="/admin">Admin</a>
+                    </li>
+                {{/admin}}
+
+
+                {{#loginEmail}} <!--세션 o -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="/logout">Log-out</a>
+                    </li>
+                {{/loginEmail}}
+
+
+                {{^loginEmail}} <!--세션 x -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="/login">Log-in</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="/signup">Sign-up</a>
+                    </li>
+                {{/loginEmail}}
+            </ul>
+
+
+        </div>
+    </nav>
+

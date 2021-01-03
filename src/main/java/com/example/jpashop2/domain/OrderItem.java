@@ -27,9 +27,6 @@ public class OrderItem {
     private int orderPrice; //주문 가격
     private int count; //주문 수량
 
-
-    //**아래 내용 스스로 꼭 읽어보기 (대충함..)
-
     //**주문 상품 - 생성 & 초기 셋팅
     public static OrderItem createOrderItem(Item item, int orderPrice, int count) {
         OrderItem orderItem = new OrderItem();//OrderItem 객체 생성

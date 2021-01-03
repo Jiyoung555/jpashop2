@@ -28,12 +28,14 @@ public class OrderService {
         //Delivery 배송정보 생성
         Delivery delivery = new Delivery();
         delivery.setAddress((member.getAddress())); //회원 주소로 배송하기
+        delivery.setStatus(DeliveryStatus.READY); //**내가 추가함
 
         //OrderItem 주문상품 "먼저" 생성(Order 주문을 위해, Item 상품 먼저 셋팅)
         OrderItem orderItem = OrderItem.createOrderItem(item, item.getPrice(), count);
 
         //Order 주문 생성
         Order order = Order.createOrder(member, delivery, orderItem);
+        order.setStatus(OrderStatus.ORDERED);//**내가 추가함
 
         //Order 주문 저장
         return orderRepository.save(order);

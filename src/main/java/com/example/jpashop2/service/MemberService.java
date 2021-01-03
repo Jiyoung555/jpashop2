@@ -3,6 +3,7 @@ import com.example.jpashop2.domain.Member;
 import com.example.jpashop2.dto.MemberForm;
 import com.example.jpashop2.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,6 +17,7 @@ import java.util.List;
 -DB 수정하다가 에러나면, 다 되돌려야죠
 -성공시 commit, 실패시 rollback
 */
+@Slf4j
 @Service
 @Transactional(readOnly = true) //모든 public 메소드에 적용시키기 //import springframework
 @RequiredArgsConstructor //final 필드는 생성자를 만들어, 자동으로 객체 얻어오기
@@ -78,6 +80,8 @@ public class MemberService {
                 //세션 등록
                 httpSession.setAttribute("loginEmail", member.getEmail());
                 httpSession.setAttribute("loginId", member.getId());
+                httpSession.setAttribute("loginMember", member);
+                log.info("loginMember : " + member);
 
                 //어드민 계정이면, 세션 또 등록
                 if (member.getRole().equals("admin")) {

@@ -66,7 +66,9 @@ public class Order {
     private LocalDateTime orderDate;
 
     //주문 상태 //enum타입 (IN_CART, ORDERED, CANCLED)
+    //@Enumerated(EnumType.STRING)
     private OrderStatus status;
+
 
     //==================
 

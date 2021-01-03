@@ -43,10 +43,11 @@ var store = {
 
     order: function() {
         var data = { //form 데이터를 JSON으로 만듬
-          id: document.querySelector('#item_id').value,
-          name: document.querySelector('#item_name').value,
+          itemId: document.querySelector('#item_id').value,
+          itemName: document.querySelector('#item_name').value,
           orderPrice: document.querySelector('#orderPrice').value,
           count: document.querySelector('#count').value,
+          loginId: document.querySelector('#loginId').value,
         };
 
         fetch('/api/order', {
