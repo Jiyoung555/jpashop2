@@ -44,7 +44,7 @@ public class Order {
     //**여기도 바꾸지만, 저기도 바꾸기 (하나의 메소드로)
     public void addOrderItem(OrderItem orderItem) {
         this.orderItems.add(orderItem);
-        orderItem.setOrder(this); //OrderItem 테이블에 @setter 만들기
+        orderItem.setOrder(this); //OrderItem 테이블에 @setter 만들기 //this = 이 Order
     }
 
     //==========================

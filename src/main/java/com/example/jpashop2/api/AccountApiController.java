@@ -1,4 +1,4 @@
-package com.example.jpashop2.controller;
+package com.example.jpashop2.api;
 
 import com.example.jpashop2.domain.Address;
 import com.example.jpashop2.domain.Member;

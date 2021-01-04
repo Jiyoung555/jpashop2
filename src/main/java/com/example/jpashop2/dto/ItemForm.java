@@ -27,12 +27,15 @@ public class ItemForm {
 
     //dto -> entity
 
+
+
     public Book toBook() {
         Book book = new Book();
         //new Item() 안됨. 추상클래스라서 //Item item으로 하면, book 부분 Set 안 됨
         book.setName(name);
         book.setPrice(price);
         book.setStockQuuantity(stockQuuantity);
+
         book.setAuthor(author);//Book
         book.setType(type);
         return book;

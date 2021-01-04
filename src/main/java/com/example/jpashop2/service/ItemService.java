@@ -1,6 +1,5 @@
 package com.example.jpashop2.service;
-import com.example.jpashop2.domain.Item;
-import com.example.jpashop2.domain.Member;
+import com.example.jpashop2.domain.*;
 import com.example.jpashop2.repository.ItemRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -14,8 +13,9 @@ public class ItemService {
 
     private final ItemRepository itemRepository;
 
+
     //Item 생성 (저장)
-    @Transactional//본 메소드는 DB 조작해야함. 읽기 전용 아님
+    @Transactional//읽기 전용 아님
     public Long saveItem(Item item) {
         itemRepository.save(item); //save 메소드를 리턴값 없는 void로 만들어놨음
         return item.getId();

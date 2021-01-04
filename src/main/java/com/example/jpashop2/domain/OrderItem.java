@@ -35,6 +35,7 @@ public class OrderItem {
         orderItem.setOrderPrice(orderPrice);
         orderItem.setCount(count);
 
+
         item.removeStock(count);//주문 상품 생성했으니 -> Item 재고 수량 빼기
 
         return orderItem;
