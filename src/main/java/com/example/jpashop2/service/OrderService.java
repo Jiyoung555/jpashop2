@@ -1,13 +1,16 @@
 package com.example.jpashop2.service;
 
 import com.example.jpashop2.domain.*;
+import com.example.jpashop2.dto.MemberForm;
 import com.example.jpashop2.repository.ItemRepository;
 import com.example.jpashop2.repository.MemberRepository;
 import com.example.jpashop2.repository.OrderRepository;
+import com.example.jpashop2.repository.OrderRepositoryTest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Service
@@ -17,6 +20,7 @@ public class OrderService {
     private final OrderRepository orderRepository;
     private final MemberRepository memberRepository;
     private final ItemRepository itemRepository;
+    private final OrderRepositoryTest test;
 
     //Order 주문하기
     @Transactional
@@ -58,11 +62,25 @@ public class OrderService {
         }
 
 
-    /*
-    //[참고] Order 주문 검색
-    public List<Order> findOrders(OrderSearch orderSearch) {
-        return orderRepository.findAll(orderSearch);
-    }
-    */
+        //사용x
+        //@Transactional(readOnly = true)//위로 뺌
+        public List<Order> findMyOrders(Long memberId){
+            List<Order> myOrderList = orderRepository.findByMemberId(memberId);
+            return myOrderList;
+        }
+
+
+        //@Transactional(readOnly = true)//위로 뺌
+        public Order findOne(Long orderId) {
+            return orderRepository.findOne(orderId);
+        }
+
+
+        /*
+        //[참고] Order 주문 검색
+        public List<Order> findOrders(OrderSearch orderSearch) {
+            return orderRepository.findAll(orderSearch);
+        }
+        */
 
 }

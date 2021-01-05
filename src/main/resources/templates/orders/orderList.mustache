@@ -1,0 +1,46 @@
+{{>head}}
+
+
+<div class="account-label">
+    <h4>오더 목록</h4>
+</div>
+
+<!-- 테이블-->
+<div class="account-mid">
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th>주문번호</th>
+            <th>주문일</th>
+            <th>주문상태</th>
+            <th>배송정보</th>
+            <th>주문상품</th>
+        </tr>
+        </thead>
+
+        <tbody>
+
+
+            {{#myOrderList}}
+            {{#addressList}}
+            <tr>
+                <td><a href="/orderShow/{{id}}">{{id}}</a></td>
+                <td>{{orderDate}}</td>
+                <td>{{status}}</td>
+
+                <td>{{delivery}}</td>
+            </tr>
+            {{/addressList}}
+            {{/myOrderList}}
+
+
+
+        </tbody>
+    </table>
+</div>
+
+
+
+
+
+{{>footer}}

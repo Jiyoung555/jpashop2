@@ -1,0 +1,41 @@
+{{>head}}
+
+
+<div class="noticeShow-label">
+    <h4>Order 상세보기</h4>
+</div>
+
+<div class="noticeShow-table">
+    <table class="table table-hover">
+
+        <tbody>
+        {{#order}}
+<!--아래 내용 다 고쳐야됨. 여기도 리스트 결합??이 필요하겠구만-->
+            <tr>
+                <th>제목</th>
+                <td>{{title}}</td>
+            </tr>
+
+            <tr>
+                <th>내용</th>
+                <td>{{content}}</td>
+            </tr>
+
+            <tr>
+                <th>첨부파일</th>
+                <td><img src="/uploads/{{imageName}}" alt=""></td>
+            </tr>
+
+        {{/order}}
+        </tbody>
+
+    </table>
+</div>
+
+
+<div class="noticeShow-btn">
+    <a href="/notice" class="btn btn-success btn-lg btn-block btn-list">목록으로</a>
+</div>
+
+
+{{>footer}}
