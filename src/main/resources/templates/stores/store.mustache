@@ -45,6 +45,11 @@
 
         <!-- 오른쪽 : 상품 진열 -->
         <div class="col-9 store-items">
+            <div>
+                <button type="button" id="check_order_btn">구매하기</button>
+            </div>
+
+            <form>
             <div class="row store-line1">
 
                 {{#itemList}}
@@ -59,6 +64,7 @@
                         <a href="/store/{{id}}">
                         <span>{{name}}</span>
                         <i class="btn material-icons">pageview</i>
+                        <input type="checkbox" name="checkbox" value="{{id}}"><!-- 체크박스 -->
                     </a>
                     </div>
 
@@ -69,11 +75,13 @@
                 {{/itemList}}
 
             </div> <!-- 1줄 row 끝-->
+            </form>
 
         </div> <!-- end col-9-->
     </div> <!-- end row-->
+
 </div> <!-- end container-->
 
-
+<script src = "/js/app/common/store_common.js"></script>
 
 {{>footer}}

@@ -9,6 +9,9 @@ import com.example.jpashop2.service.MemberService;
 import lombok.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Getter
 @Setter
 @ToString
@@ -25,6 +28,18 @@ public class OrderForm {
     int orderPrice;
     int count;
     Long loginId;
+
+    ArrayList<Long> itemIds;//checkbox로 여러개 주문시
+    //테스트중..
+//    public List<Item> toItemList(){
+//        List<Item> itemList = new ArrayList<>();
+//        for(int i = 0; i < itemIds.size(); i++){
+//            Long id = itemIds.get(i);
+//            Item item = itemService.findOne(id);
+//            itemList.add(item);
+//        }
+//        return itemList;
+//    }
 
     public Member toMember() {
         Member member = memberService.findOne(loginId);

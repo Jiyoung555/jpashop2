@@ -1,6 +1,6 @@
 package com.example.jpashop2.controller;
-
 import com.example.jpashop2.domain.*;
+import com.example.jpashop2.dto.MyOrdersDTO;
 import com.example.jpashop2.service.MemberService;
 import com.example.jpashop2.service.OrderService;
 import lombok.RequiredArgsConstructor;
@@ -23,38 +23,35 @@ public class OrderController {
 
     @GetMapping("/order")
     public String orderList(Model model, HttpSession httpSession){
-        Object temp = httpSession.getAttribute("loginId");
+        Object temp = httpSession.getAttribute("loginId");//로그인 Id
         Long memberId = Long.valueOf(String.valueOf(temp));//Object -> Long 타입변환
         log.info("memberId : " + memberId);
-
-        Member loginMember = memberService.findOne(memberId);
-        List<Order> myOrderList = loginMember.getOrders();
-
+        Member loginMember = memberService.findOne(memberId);//로그인 Member
+        List<Order> myOrders = loginMember.getOrders();//Order 전부 가져오기
         //Iterable<Order> myOrderList = orderService.findMyOrders(memberId); //안됨
 
-        log.info("myOrderList : " + myOrderList);
-        model.addAttribute("myOrderList", myOrderList);
+        List<MyOrdersDTO> myOrderDetail = new ArrayList<>();//리스트 틀
 
-        List<Address> addressList = new ArrayList<>();
-
-        for(int i = 0; i < myOrderList.size(); i++){
-            Order order = myOrderList.get(i);
+        for(int i = 0; i < myOrders.size(); i++){
+            Order order = myOrders.get(i);
             Delivery delivery = order.getDelivery();
-            Address address = delivery.getAddress();
-            log.info("address : " + address);
-            addressList.add(address);
+            List<OrderItem> orderItems = order.getOrderItems();
+
+            MyOrdersDTO myOrder = new MyOrdersDTO(order, delivery, orderItems);
+            myOrderDetail.add(myOrder);
         }
-        model.addAttribute("addressList", addressList);
 
-        //myOrderList + addressList 합치는 방법??
-
+        model.addAttribute("myOrderDetail", myOrderDetail);
         return "orders/orderList";
     }
 
-    @GetMapping("/orderShow/{id}")
-    public String orderShow(@PathVariable Long id, Model model){
-        Order order = orderService.findOne(id);
-        model.addAttribute("order", order);
+    @GetMapping("/orderShow/{orderId}")
+    public String orderShow(@PathVariable Long orderId, Model model){
+        Order order = orderService.findOne(orderId);
+        Delivery delivery = order.getDelivery();
+        List<OrderItem> orderItems = order.getOrderItems();
+        MyOrdersDTO myOrder = new MyOrdersDTO(order, delivery, orderItems);
+        model.addAttribute("myOrder", myOrder);
         return "orders/orderShow";
     }
 

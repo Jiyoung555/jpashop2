@@ -54,11 +54,11 @@ public class OrderService {
         //Order 취소
         order.cancel();
 
-        /*생략 가능
+        /*생략 가능 (해도 되고, 안 해도 됨)
         -트랜잭셔널 처리했기 때문에, JPA가 알아서 변경을 감지하고 반영함
         -구글링 : jpa Dirty Checking
         */
-        // orderRepository.save(order); //해도 되고, 안 해도 됨
+        //orderRepository.save(order);
         }
 
 
@@ -74,6 +74,7 @@ public class OrderService {
         public Order findOne(Long orderId) {
             return orderRepository.findOne(orderId);
         }
+
 
 
         /*

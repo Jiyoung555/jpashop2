@@ -13,34 +13,32 @@
             <th>주문번호</th>
             <th>주문일</th>
             <th>주문상태</th>
+
             <th>배송정보</th>
-            <th>주문상품</th>
+            <th>배송상태</th>
+
+            <th>주문상품명</th>
+            <th>총 가격 (주문가격x수량)</th>
         </tr>
         </thead>
 
         <tbody>
-
-
-            {{#myOrderList}}
-            {{#addressList}}
+            {{#myOrderDetail}}
             <tr>
-                <td><a href="/orderShow/{{id}}">{{id}}</a></td>
+                <td><a href="/orderShow/{{orderId}}">{{orderId}}</a></td>
                 <td>{{orderDate}}</td>
-                <td>{{status}}</td>
+                <td>{{orderStatus}}</td>
 
-                <td>{{delivery}}</td>
+                <td>[{{zipcode}}] {{addr1}}, {{addr2}}</td>
+                <td>{{deliveryStatus}}</td>
+
+                <td>{{name}}</td>
+                <td>{{totalPrice}}원 ({{orderPrice}}원 x {{count}}개)</td>
             </tr>
-            {{/addressList}}
-            {{/myOrderList}}
-
-
-
+            {{/myOrderDetail}}
         </tbody>
     </table>
 </div>
-
-
-
 
 
 {{>footer}}

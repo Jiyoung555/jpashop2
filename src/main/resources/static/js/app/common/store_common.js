@@ -4,6 +4,7 @@ var store = {
 
         const cartBtn = document.querySelector('#store_cart_btn'); //storeShow 장바구니 버튼
         const orderBtn = document.querySelector('#store_order_btn'); //storeShow 구매하기 버튼
+        const checkOrderBtn = document.querySelector('#check_order_btn'); //store 체크박스 구매하기 버튼
 
         if (cartBtn != null) {
           cartBtn.addEventListener('click', _this.cart);
@@ -11,7 +12,9 @@ var store = {
         if (orderBtn != null) {
           orderBtn.addEventListener('click', _this.order);
         }
-
+        if (checkOrderBtn != null) {
+          checkOrderBtn.addEventListener('click', _this.checkOrder);
+        }
 
     },
 
@@ -66,6 +69,43 @@ var store = {
         });
     },
 
+    //안됨
+    checkOrder: function() {
+        var itemIds = document.getElementsByName("checkbox");
+
+        var count = 0; //체크한 개수: 일단 0개로 초기화
+        for (var i = 0; i < itemIds.length; i++) {
+            if (itemIds[i].checked == true) {
+                console.log(itemIds[i]);
+                count++;
+            }
+        }
+
+
+
+        if (count == 0) { //체크한 개수 0개
+            alert("결제할 상품을 선택해 주세요");
+
+        } else { //체크한 거 있으면
+            fetch('/api/orderCheckbox', {
+              method: 'POST',
+              body: JSON.stringify(itemIds),
+              headers: {
+                'Content-Type': 'application/json'
+              }
+            }).then(function(response) {
+              if (response.ok) {
+                alert('주문 성공');
+                window.location.reload=true;
+              } else {
+                alert('주문 실패');
+              }
+            });
+
+
+        }
+
+    }
     // 메소드 추가시 여기서부터
 
 };
