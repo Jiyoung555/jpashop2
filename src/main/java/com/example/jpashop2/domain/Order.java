@@ -65,7 +65,7 @@ public class Order {
     //주문한 시각
     private LocalDateTime orderDate;
 
-    //주문 상태 //enum타입 (IN_CART, ORDERED, CANCLED)
+    //주문 상태 //enum타입
     //@Enumerated(EnumType.STRING)
     private OrderStatus status;
 
@@ -83,11 +83,12 @@ public class Order {
         order.setMember(member);//회원
         order.setDelivery(delivery);//배송
 
+
         for (OrderItem orderItem : orderItems) {
             order.addOrderItem(orderItem);//주문 상품들
         }
 
-        order.setStatus(OrderStatus.IN_CART);//주문 상태
+        order.setStatus(OrderStatus.ORDERED);//주문 상태(**IN_CART에서 내가 바꿈)
         order.setOrderDate(LocalDateTime.now());//주문 생성시간
 
         return order;
@@ -103,7 +104,7 @@ public class Order {
         }
 
         //(배송 완료된 게 아니라면) 주문 취소시키기
-        this.setStatus(OrderStatus.CANCELD);
+        this.setStatus(OrderStatus.CANCELED);
 
         //Order만 취소시키는 게 아니라, OrderItem들도 모두 연달아서 취소
         //주문 취소후 -> 주문 상품들도 모두 취소

@@ -27,9 +27,12 @@ public class OrderForm {
     String itemName;
     int orderPrice;
     int count;
-    Long loginId;
+    Long memberId;
 
-    ArrayList<Long> itemIds;//checkbox로 여러개 주문시
+    //아래 체크박스 두개 안 됨..
+    ArrayList<Long> cartIds;//cart -> checkbox
+
+    ArrayList<Long> itemIds;//store -> checkbox로 여러개 주문시
     //테스트중..
 //    public List<Item> toItemList(){
 //        List<Item> itemList = new ArrayList<>();
@@ -42,7 +45,7 @@ public class OrderForm {
 //    }
 
     public Member toMember() {
-        Member member = memberService.findOne(loginId);
+        Member member = memberService.findOne(memberId);
         return member;
     }
 

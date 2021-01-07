@@ -19,7 +19,7 @@ public class OrderApiController {
     public Long insertOrder(@RequestBody OrderForm form){
         log.info("form : " + form.toString());
 
-        Long memberId = form.getLoginId();
+        Long memberId = form.getMemberId();
         Long itemId = form.getItemId();
         int count = form.getCount();
 
@@ -32,13 +32,18 @@ public class OrderApiController {
         return orderId;
     }
 
-    //안됨
+    //안됨 (store)
     @PostMapping("/api/orderCheckbox")
     public Long insertOrderCheckbox(@RequestBody OrderForm form){
         log.info("form : " + form);
         return 0L;
     }
 
-
+    //안됨 (cart)
+    @PostMapping("/api/checkedCartToOrder")
+    public Long checkedCartToOrder(@RequestBody OrderForm form){
+        log.info("form : " + form);
+        return 0L;
+    }
 
 }

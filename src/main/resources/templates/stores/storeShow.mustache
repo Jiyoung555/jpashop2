@@ -10,7 +10,7 @@
         <div class="col-3">
             <form>
                 <p id="item_name">{{name}}</p>
-                <p id="orderPrice">{{price}}</p>
+                <p id="price">{{price}}</p>
 
                 <hr>
 
@@ -27,10 +27,10 @@
                 <p>총 금액 </p>
 
                 <input id="item_id" type="hidden" value="{{id}}">
-                <input id="loginId" type="hidden" value="{{loginId}}">
+                <input id="memberId" type="hidden" value="{{loginId}}">
                 <!--로그인 id넘버. 세션. 비로그인시 에러남-->
 
-                <!--button type="button" id="store_cart_btn">장바구니</button-->
+                <button type="button" id="store_cart_btn">장바구니</button>
                 <button type="button" id="store_order_btn">구매하기</button>
             </form>
         </div>

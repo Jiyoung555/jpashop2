@@ -1,0 +1,45 @@
+{{>head}}
+
+
+<div class="account-label">
+    <h4>카트 목록</h4>
+</div>
+
+<div>
+    <button type="button" id="check_order_btn">구매하기</button>
+</div>
+
+<!-- 테이블-->
+<div class="account-mid">
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th>카트번호</th>
+            <th>카트날짜</th>
+            <th>카트상태</th>
+
+            <th>카트상품명</th>
+            <th>총 가격 (가격x수량)</th>
+            <th>선택</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        {{#myCartDetail}}
+            <tr>
+                <td><a href="/cartShow/{{cartId}}">{{cartId}}</a></td>
+                <td>{{cartDate}}</td>
+                <td>{{cartStatus}}</td>
+
+                <td>{{name}}</td>
+                <td>{{totalPrice}}원 ({{cartPrice}}원 x {{cartCount}}개)</td>
+                <td><input type="checkbox" name="checkbox" value="{{cartId}}"></td>
+            </tr>
+        {{/myCartDetail}}
+        </tbody>
+    </table>
+</div>
+
+<script src = "/js/app/common/order.js"></script>
+
+{{>footer}}

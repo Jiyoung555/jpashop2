@@ -39,7 +39,6 @@ public class OrderService {
 
         //Order 주문 생성
         Order order = Order.createOrder(member, delivery, orderItem);
-        order.setStatus(OrderStatus.ORDERED);//**내가 추가함
 
         //Order 주문 저장
         return orderRepository.save(order);

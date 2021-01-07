@@ -24,7 +24,7 @@ public class OrderRepository {
     }
 
 
-    //**내가 추가 (사용x)
+    //**내가 추가 (사용x!!!)
     //memberId값을(FK) 통해, 내 Order들 가져오기 //member_id가 없어서 안된다함. 나중에 해결
     public List<Order> findByMemberId(Long memberId) {
         return em.createQuery("select o.id, o.orderDate from Order o where o.member_id = :id", Order.class)

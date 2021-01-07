@@ -1,0 +1,58 @@
+{{>head}}
+
+
+<div class="cartShow-label">
+    <h4>Cart 상세보기</h4>
+</div>
+
+
+<div class="cartShow-btns">
+    <a href="/cart" class="btn btn-list">목록</a>
+    <a href="/cartEdit/{{myCart.cartId}}" class="btn btn-edit">수정</a>
+    <button class="btn" id="cart-destroy-btn">삭제</button> <!--js-->
+</div>
+
+<div class="cartShow-table">
+    <table class="table table-hover">
+        <tbody>
+        {{#myCart}}
+            <tr>
+                <th>카트번호</th>
+                <td>{{cartId}}</td>
+            </tr>
+
+            <tr>
+                <th>담은날짜</th>
+                <td>{{cartDate}}</td>
+            </tr>
+
+            <tr>
+                <th>카트상태</th>
+                <td>{{cartStatus}}</td>
+            </tr>
+            <!------------------------------------>
+            <tr>
+                <th>상품명</th>
+                <td>{{name}}</td>
+            </tr>
+
+            <tr>
+                <th>총 가격</th>
+                <td>{{totalPrice}}원 ({{cartPrice}}원 x {{cartCount}}개)</td>
+            </tr>
+
+            <tr>
+                <th>첨부파일</th>
+                <td><img src="/uploads2/{{imageName}}" alt=""></td>
+            </tr>
+
+
+        {{/myCart}}
+        </tbody>
+    </table>
+</div>
+
+
+<script src = "/js/app/common/order.js"></script>
+
+{{>footer}}

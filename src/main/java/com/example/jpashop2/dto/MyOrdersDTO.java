@@ -1,8 +1,6 @@
 package com.example.jpashop2.dto;
-
 import com.example.jpashop2.domain.*;
 import lombok.*;
-
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -24,7 +22,7 @@ public class MyOrdersDTO {
 
     Long orderItemId;
     int orderPrice;
-    int count;
+    int count;//orderCount로 고쳐야하나??
     int totalPrice;
     String name;//item
     String imageName;
