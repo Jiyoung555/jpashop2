@@ -2,6 +2,7 @@ package com.example.jpashop2.dto;
 import com.example.jpashop2.domain.*;
 import lombok.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -20,12 +21,19 @@ public class MyOrdersDTO {
     String addr1;
     String addr2;
 
-    Long orderItemId;
-    int orderPrice;
-    int count;//orderCount로 고쳐야하나??
+//    Long orderItemId;
+//    int orderPrice;
+//    int count;//orderCount로 고쳐야하나??
+//    int totalPrice;
+//    String name;//item
+//    String imageName;
+
+    List<Long> orderItemIdArr = new ArrayList<>();//그냥 =null로 해두면, 에러남(NullPointerException)
+    List<Integer> orderPriceArr = new ArrayList<>();
+    List<Integer> countArr = new ArrayList<>();//orderCount로 고쳐야하나??
     int totalPrice;
-    String name;//item
-    String imageName;
+    List<String> nameArr = new ArrayList<>();//item
+    List<String> imageNameArr = new ArrayList<>();
 
     public MyOrdersDTO(Order order, Delivery delivery, List<OrderItem> orderItems) {
         this.orderId = order.getId();
@@ -40,13 +48,25 @@ public class MyOrdersDTO {
 
         for(int i = 0; i < orderItems.size(); i++){
             OrderItem orderItem = orderItems.get(i);
-            this.orderItemId = orderItem.getId();//지금은 Order당 OrderItem 1개라서...
-            this.orderPrice = orderItem.getOrderPrice();
-            this.count = orderItem.getCount();
-            this.totalPrice = orderItem.getTotalPrice();
-            this.name = orderItem.getItem().getName();//item
-            this.imageName = orderItem.getItem().getImagename();
+            this.orderItemIdArr.add(orderItem.getId());
+            this.orderPriceArr.add(orderItem.getOrderPrice());
+            this.countArr.add(orderItem.getCount());
+
+            this.totalPrice += orderItem.getTotalPrice();
+
+            this.nameArr.add(orderItem.getItem().getName());//item
+            this.imageNameArr.add(orderItem.getItem().getImagename());
         }
+
+//        for(int i = 0; i < orderItems.size(); i++){
+//            OrderItem orderItem = orderItems.get(i);
+//            this.orderItemId = orderItem.getId();//지금은 Order당 OrderItem 1개라서...
+//            this.orderPrice = orderItem.getOrderPrice();
+//            this.count = orderItem.getCount();
+//            this.totalPrice = orderItem.getTotalPrice();
+//            this.name = orderItem.getItem().getName();//item
+//            this.imageName = orderItem.getItem().getImagename();
+//        }
     }
 
 

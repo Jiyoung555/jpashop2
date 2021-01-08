@@ -96,40 +96,43 @@ var store = {
     //안됨
     checkOrder: function() {
         var itemIds = document.getElementsByName("checkbox");
+        var itemIdArr = new Array(); //**
 
         var count = 0; //체크한 개수: 일단 0개로 초기화
         for (var i = 0; i < itemIds.length; i++) {
             if (itemIds[i].checked == true) {
-                console.log(itemIds[i]);
+                console.log(itemIds[i].value);
+                itemIdArr.push(itemIds[i].value);//**그 value값을!! 배열에 담기
                 count++;
             }
         }
+        console.log(itemIdArr);
 
-
+        var data = {itemIdArr};
 
         if (count == 0) { //체크한 개수 0개
             alert("결제할 상품을 선택해 주세요");
 
         } else { //체크한 거 있으면
-            fetch('/api/orderCheckbox', {
+            fetch('/api/checkedStoreToOrder', {//OrderApiController
               method: 'POST',
-              body: JSON.stringify(itemIds),
+              body: JSON.stringify(data),
               headers: {
                 'Content-Type': 'application/json'
               }
             }).then(function(response) {
+
               if (response.ok) {
                 alert('주문 성공');
-                window.location.reload=true;
+                window.location.href='/order';
               } else {
                 alert('주문 실패');
               }
+
             });
+        }//if~else
+    }//end method
 
-
-        }
-
-    }
     // 메소드 추가시 여기서부터
 
 };

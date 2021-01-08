@@ -19,6 +19,7 @@ public class CartForm {
     @Autowired
     private ItemService itemService;
 
+    Long cartId; //**
     Long itemId;
     String itemName;
     int cartPrice;

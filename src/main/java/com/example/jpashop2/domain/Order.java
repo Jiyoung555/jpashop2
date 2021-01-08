@@ -76,7 +76,7 @@ public class Order {
     public static Order createOrder(
             Member member,
             Delivery delivery,
-            OrderItem... orderItems) { // ... = [] 배열
+            List<OrderItem> orderItems) { // ... = [] 배열 //OrderItem... orderItems에서 내가 바꿈**
         // 주문 객체 만들고, 초기 셋팅
         Order order = new Order(); //주문 객체 만들고
 

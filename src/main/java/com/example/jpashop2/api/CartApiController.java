@@ -37,7 +37,7 @@ public class CartApiController {
             for(int i = 0; i < myCarts.size(); i++){
                 Cart cart = myCarts.get(i);//각 기존 카트당
 
-                if(cart.getStatus() != OrderStatus.OUT_CART){//(카트 취소상태 아니면)
+                if(cart.getStatus() == OrderStatus.IN_CART){//카트인 상태일 때만 (OUT, ORDERED 말고)
                     cartItems = cart.getCartItems();//기존 카트 아이템 가져와서, 리스트에 담기
                 }
 

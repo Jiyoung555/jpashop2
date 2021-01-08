@@ -36,7 +36,7 @@ public class CartController {
 
         for(int i = 0; i < myCarts.size(); i++){
             Cart cart = myCarts.get(i);//회원 Cart들 중, 한 카트
-            if(cart.getStatus() != OrderStatus.OUT_CART) {//(카트 취소상태 아니면)
+            if(cart.getStatus() == OrderStatus.IN_CART) {//카트인 상태인 것만
                 List<CartItem> cartItems = cart.getCartItems();//그 한 카트의, 모든 카트 아이템들
                 MyCartsDTO myCart = new MyCartsDTO(cart, cartItems);
                 myCartDetail.add(myCart);

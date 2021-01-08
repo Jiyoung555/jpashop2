@@ -29,30 +29,16 @@ public class OrderForm {
     int count;
     Long memberId;
 
-    //아래 체크박스 두개 안 됨..
-    ArrayList<Long> cartIds;//cart -> checkbox
+    //cartList에서 체크한 거
+    ArrayList<Long> cartIdArr;
 
-    ArrayList<Long> itemIds;//store -> checkbox로 여러개 주문시
-    //테스트중..
-//    public List<Item> toItemList(){
-//        List<Item> itemList = new ArrayList<>();
-//        for(int i = 0; i < itemIds.size(); i++){
-//            Long id = itemIds.get(i);
-//            Item item = itemService.findOne(id);
-//            itemList.add(item);
-//        }
-//        return itemList;
-//    }
+    //store에서 체크한 거
+    ArrayList<Long> itemIdArr;
 
     public Member toMember() {
         Member member = memberService.findOne(memberId);
         return member;
     }
-
-//    public Item toItem(){
-//        Item item = itemService.findOne(itemId);
-//        return item;
-//    }
 
     public OrderItem toOrderItem(){
         Item item = itemService.findOne(itemId);

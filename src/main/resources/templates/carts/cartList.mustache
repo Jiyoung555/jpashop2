@@ -11,6 +11,7 @@
 
 <!-- 테이블-->
 <div class="account-mid">
+    <form> <!--테스트중-->
     <table class="table table-hover">
         <thead>
         <tr>
@@ -20,6 +21,7 @@
 
             <th>카트상품명</th>
             <th>총 가격 (가격x수량)</th>
+            <th>구매</th>
             <th>선택</th>
         </tr>
         </thead>
@@ -33,11 +35,17 @@
 
                 <td>{{name}}</td>
                 <td>{{totalPrice}}원 ({{cartPrice}}원 x {{cartCount}}개)</td>
-                <td><input type="checkbox" name="checkbox" value="{{cartId}}"></td>
+                <td><button type="button" id="cart_order_btn">구매하기</button></td>
+                <td><input type="checkbox" name="checkbox_cart" value="{{cartId}}"></td>
             </tr>
+
+            <input type="hidden" value="{{cartId}}" id="cart_id"><!--테스트-->
         {{/myCartDetail}}
         </tbody>
     </table>
+
+
+    </form>
 </div>
 
 <script src = "/js/app/common/order.js"></script>

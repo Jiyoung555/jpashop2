@@ -43,18 +43,18 @@
             <!------------------------------------>
             <tr>
                 <th>상품명</th>
-                <td>{{name}}</td>
+                <td>{{nameArr}}</td>
             </tr>
 
             <tr>
                 <th>총 가격</th>
-                <td>{{totalPrice}}원 ({{orderPrice}}원 x {{count}}개)</td>
+                <td>{{totalPrice}}원 ({{orderPriceArr}}원, {{countArr}}개)</td>
             </tr>
 
-            <tr>
-                <th>첨부파일</th>
-                <td><img src="/uploads2/{{imageName}}" alt=""></td>
-            </tr>
+<!--            <tr>-->
+<!--                <th>첨부파일</th>-->
+<!--                <td><img src="/uploads2/" alt=""></td>--> <!--imageNameArr-->
+<!--            </tr>-->
 
 
         {{/myOrder}}

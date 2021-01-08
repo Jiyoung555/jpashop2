@@ -68,6 +68,11 @@ public class Cart {
 
     }
 
+    public void ordered() {
+        this.setStatus(OrderStatus.ORDERED);
+    }
+
+
     public int getTotalPrice() {
         int totalPrice = 0;
 

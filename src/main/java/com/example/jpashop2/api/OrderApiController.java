@@ -1,12 +1,20 @@
 package com.example.jpashop2.api;
 
+import com.example.jpashop2.domain.Cart;
+import com.example.jpashop2.domain.CartItem;
 import com.example.jpashop2.domain.Item;
+import com.example.jpashop2.domain.Member;
+import com.example.jpashop2.dto.CartForm;
 import com.example.jpashop2.dto.OrderForm;
+import com.example.jpashop2.service.CartService;
+import com.example.jpashop2.service.MemberService;
 import com.example.jpashop2.service.OrderService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.List;
 
 @Slf4j
@@ -14,16 +22,24 @@ import java.util.List;
 @RestController
 public class OrderApiController {
     private final OrderService orderService;
+    private final CartService cartService;
+    private final MemberService memberService;
 
     @PostMapping("/api/order")
     public Long insertOrder(@RequestBody OrderForm form){
         log.info("form : " + form.toString());
 
+        List<Long> itemIdArr = new ArrayList<>();//**
+        List<Integer> countArr = new ArrayList<>();//**
+
         Long memberId = form.getMemberId();
         Long itemId = form.getItemId();
         int count = form.getCount();
 
-        return orderService.order(memberId, itemId, count);
+        itemIdArr.add(itemId);
+        countArr.add(count);
+
+        return orderService.order(memberId, itemIdArr, countArr);//**여러 item 선택할 경우로 수정함
     }
 
     @DeleteMapping("/api/order/{orderId}")
@@ -32,18 +48,85 @@ public class OrderApiController {
         return orderId;
     }
 
-    //안됨 (store)
-    @PostMapping("/api/orderCheckbox")
-    public Long insertOrderCheckbox(@RequestBody OrderForm form){
+
+    //store에서 체크박스 구매 (개수는 아이템당 1개)
+    @PostMapping("/api/checkedStoreToOrder")
+    public Long checkedStoreToOrder(@RequestBody OrderForm form, HttpSession httpSession){
         log.info("form : " + form);
-        return 0L;
+        List<Long> itemIdArr = form.getItemIdArr();//store 여러개 -> order
+
+        Object temp = httpSession.getAttribute("loginId");//로그인 Id
+        Long memberId = Long.valueOf(String.valueOf(temp));//Object -> Long 타입변환
+        log.info("memberId : " + memberId);
+        Member loginMember = memberService.findOne(memberId);//로그인 Member
+
+        List<Integer> countArr = new ArrayList<>();
+        for (int i = 0; i < itemIdArr.size(); i++) {
+            countArr.add(1);
+        }
+
+        return orderService.order(memberId, itemIdArr, countArr);
+
     }
 
-    //안됨 (cart)
+    //cartList에서 체크한 거 주문하기
     @PostMapping("/api/checkedCartToOrder")
-    public Long checkedCartToOrder(@RequestBody OrderForm form){
+    public Long checkedCartToOrder(@RequestBody OrderForm form) {
         log.info("form : " + form);
-        return 0L;
+        List<Long> cartIdArr = form.getCartIdArr();//cart 여러개 -> order
+        Long memberId = null;
+        List<Long> itemIdArr = new ArrayList<>();//**
+        List<Integer> countArr = new ArrayList<>();//**
+
+        for (int i = 0; i < cartIdArr.size(); i++) {
+            Long cartId = cartIdArr.get(i);
+            Cart cart = cartService.findOne(cartId); //cart 1개
+            memberId = cart.getMember().getId();
+
+            List<CartItem> cartItems = cart.getCartItems();//cart 1개당, item들
+
+            for (int k = 0; k < cartItems.size(); k++) {
+                CartItem cartItem = cartItems.get(k);
+
+                Long itemId = cartItem.getItem().getId();
+                int count = cartItem.getCartCount();
+
+                itemIdArr.add(itemId);//**
+                countArr.add(count);//**
+            }
+        }
+        return orderService.cartArrToOrder(cartIdArr, memberId, itemIdArr, countArr);
+        //return "success";
+        //orderService.cartToOrder(cartId, memberId, itemId, count);
+        //이건 cart당 상품 1개인 경우라서...
+
+        //return "fail";//실패
     }
+
+    @PostMapping("/api/cartToOrder")
+    public String cartToOrder(@RequestBody CartForm form){
+        log.info("form : " + form.toString());
+        Long cartId = form.getCartId();
+        Cart cart = cartService.findOne(cartId);
+        Long memberId = cart.getMember().getId();//**
+
+        List<CartItem> cartItems = cart.getCartItems();
+        for(int i = 0; i < cartItems.size(); i++){
+            CartItem cartItem = cartItems.get(i);
+            Long itemId = cartItem.getItem().getId();//**
+            int count = cartItem.getCartCount();//**
+
+            orderService.cartToOrder(cartId, memberId, itemId, count);//이건 cart당 상품 1개인 경우라서...
+            return "success";
+        }
+
+        return "fail";//실패
+    }
+
+
+
+
+
 
 }
+
