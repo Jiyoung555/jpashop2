@@ -35,7 +35,9 @@ public class MyOrdersDTO {
     List<String> nameArr = new ArrayList<>();//item
     List<String> imageNameArr = new ArrayList<>();
 
-    public MyOrdersDTO(Order order, Delivery delivery, List<OrderItem> orderItems) {
+    String math = ""; //여러 아이템의 가격 x 수량
+
+    public MyOrdersDTO(Order order, Delivery delivery, List<OrderItem> orderItems, String math) {
         this.orderId = order.getId();
         this.orderDate = order.getOrderDate();
         this.orderStatus = order.getStatus();
@@ -57,6 +59,8 @@ public class MyOrdersDTO {
             this.nameArr.add(orderItem.getItem().getName());//item
             this.imageNameArr.add(orderItem.getItem().getImagename());
         }
+
+        this.math = math;
 
 //        for(int i = 0; i < orderItems.size(); i++){
 //            OrderItem orderItem = orderItems.get(i);

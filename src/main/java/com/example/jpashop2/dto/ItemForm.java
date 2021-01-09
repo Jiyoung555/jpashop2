@@ -1,6 +1,4 @@
 package com.example.jpashop2.dto;
-
-
 import com.example.jpashop2.domain.*;
 import lombok.*;
 
@@ -12,7 +10,7 @@ import lombok.*;
 public class ItemForm {
     String name;
     int price;
-    int stockQuuantity;
+    int stockQuantity;
 
     String sort;
 
@@ -34,7 +32,7 @@ public class ItemForm {
         //new Item() 안됨. 추상클래스라서 //Item item으로 하면, book 부분 Set 안 됨
         book.setName(name);
         book.setPrice(price);
-        book.setStockQuuantity(stockQuuantity);
+        book.setStockQuantity(stockQuantity);
 
         book.setAuthor(author);//Book
         book.setType(type);
@@ -45,7 +43,7 @@ public class ItemForm {
         Album album = new Album();
         album.setName(name);
         album.setPrice(price);
-        album.setStockQuuantity(stockQuuantity);
+        album.setStockQuantity(stockQuantity);
         album.setArtist(artist);//Album
         album.setGenre(genre);
         return album;
@@ -55,7 +53,7 @@ public class ItemForm {
         Movie movie = new Movie();
         movie.setName(name);
         movie.setPrice(price);
-        movie.setStockQuuantity(stockQuuantity);
+        movie.setStockQuantity(stockQuantity);
         movie.setDirector(director);//Movie
         movie.setActor(actor);
         return movie;

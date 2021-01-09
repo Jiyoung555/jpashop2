@@ -30,17 +30,32 @@ public class OrderController {
         //Iterable<Order> myOrderList = orderService.findMyOrders(memberId); //안됨
 
         List<MyOrdersDTO> myOrderDetail = new ArrayList<>();//리스트 틀
+        //List<String> mathArr = new ArrayList<>();//**
+
 
         for(int i = 0; i < myOrders.size(); i++){
             Order order = myOrders.get(i);
             Delivery delivery = order.getDelivery();
             List<OrderItem> orderItems = order.getOrderItems();
 
-            MyOrdersDTO myOrder = new MyOrdersDTO(order, delivery, orderItems);
+            String math = "";//null로 하지마세요
+            for(int k = 0; k < orderItems.size(); k++) {
+                int orderPrice = orderItems.get(k).getOrderPrice();//**
+                int count = orderItems.get(k).getCount();
+                System.out.println("가격 : " + orderPrice);
+                //String math = orderPrice + "원x" + count +"개";
+                //mathArr.add(math);
+                math += "(" + orderPrice + "원x" + count +"개)" ;
+            }
+            System.out.println("math : " + math);
+            MyOrdersDTO myOrder = new MyOrdersDTO(order, delivery, orderItems, math);
             myOrderDetail.add(myOrder);
         }
 
+
+
         model.addAttribute("myOrderDetail", myOrderDetail);
+        //model.addAttribute("math", math);
         return "orders/orderList";
     }
 
@@ -49,7 +64,18 @@ public class OrderController {
         Order order = orderService.findOne(orderId);
         Delivery delivery = order.getDelivery();
         List<OrderItem> orderItems = order.getOrderItems();
-        MyOrdersDTO myOrder = new MyOrdersDTO(order, delivery, orderItems);
+
+        String math = "";//null로 하지마세요
+        for(int k = 0; k < orderItems.size(); k++) {
+            int orderPrice = orderItems.get(k).getOrderPrice();//**
+            int count = orderItems.get(k).getCount();
+            System.out.println("가격 : " + orderPrice);
+            //String math = orderPrice + "원x" + count +"개";
+            //mathArr.add(math);
+            math += "(" + orderPrice + "원x" + count +"개)" ;
+        }
+
+        MyOrdersDTO myOrder = new MyOrdersDTO(order, delivery, orderItems, math);//**math 아직 정의는 안 함..
         model.addAttribute("myOrder", myOrder);
         return "orders/orderShow";
     }

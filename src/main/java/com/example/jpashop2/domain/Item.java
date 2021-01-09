@@ -27,7 +27,7 @@ public abstract class Item {//추상 클래스 //자식 클래스 - Album, Book,
 
     private String name;
     private int price;
-    private int stockQuuantity;
+    private int stockQuantity;
 
     private String imagename;
 
@@ -46,19 +46,19 @@ public abstract class Item {//추상 클래스 //자식 클래스 - Album, Book,
 
     //** stock 재고 증가 메소드
     public void addStock(int quantity) {
-        this.stockQuuantity += quantity;
+        this.stockQuantity += quantity;
     }
 
     //** stock 재고 감소 메소드
     public void removeStock(int quantity) {
-        int restStock = this.stockQuuantity - quantity;
+        int restStock = this.stockQuantity - quantity;
 
         if (restStock < 0) { //재고가 0보다 작으면
             throw new NotEnoughStockException("재고가 부족합니다.");//에러 발생
             //NotEnoughStockException -> 내가 직접 만들기
        }
 
-        this.stockQuuantity = restStock;
+        this.stockQuantity = restStock;
     }
 
     //**내가 넣음
