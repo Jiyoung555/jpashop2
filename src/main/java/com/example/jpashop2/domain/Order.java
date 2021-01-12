@@ -66,7 +66,7 @@ public class Order {
     private LocalDateTime orderDate;
 
     //주문 상태 //enum타입
-    //@Enumerated(EnumType.STRING)
+    @Enumerated(EnumType.STRING) //이거 추가시, DB drop 또 해야됨
     private OrderStatus status;
 
 

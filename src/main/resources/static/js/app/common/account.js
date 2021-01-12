@@ -24,7 +24,7 @@ var account = {
     }
   },
 
-  join: function() {
+  join: function() { //**추후 빈칸 불가 추가
     // form 데이터를 JSON으로 만듬
     var data = {
       email: document.querySelector('#join-email').value,
@@ -36,30 +36,53 @@ var account = {
       addr2: document.querySelector('#addr2').value,
     };
 
+    var password2 = document.querySelector('#join-pwd-2').value;
+
     console.log(data.email);
     console.log(data.password);
+    console.log(password2);
     console.log(data.name);
     console.log(data.role);
     console.log(data.zipcode);
     console.log(data.addr1);
     console.log(data.addr2);
 
-    fetch('/api/signup', { //action="/signup"
-      method: 'POST',
-      body: JSON.stringify(data),
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    }).then(function(response) {
-      if (response.ok) {
-        alert('회원가입 성공. 로그인 페이지로 이동합니다.');
-        //window.location.href='/signup'; //새로고침
-        window.location.href='/login'; //새로고침
-      } else {
-        alert('회원가입 실패');
-        //window.location.href='/signup'; //새로고침
-      }
-    });
+    var idCheckOrNot = document.getElementById("idCheckOrNot").value;
+    //아이디 중복확인 검증. 초기값 false //getElementById는 # 없이 id값 가져옴
+    console.log(idCheckOrNot);
+
+    //비밀번호 확인
+    var passwordCheck = 'false';
+    if(data.password == password2){
+        passwordCheck = 'true';
+    }
+
+    if(idCheckOrNot == 'true' && passwordCheck == 'true'){//true일 때만 폼제출 가능
+        fetch('/api/signup', { //action="/signup"
+          method: 'POST',
+          body: JSON.stringify(data),
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        }).then(function(response) {
+          if (response.ok) {
+            alert('회원가입 성공. 로그인 페이지로 이동합니다.');
+            window.location.href='/login'; //새로고침
+          } else {
+            alert('회원가입 실패');
+          }
+        });
+
+    } else if (idCheckOrNot == 'false' && passwordCheck == 'true'){
+        alert('아이디 중복확인을 해주세요.');
+
+    } else if (idCheckOrNot == 'true' && passwordCheck == 'false'){
+        alert('비밀번호를 확인해주세요.');
+
+    } else{
+        alert('아이디, 비밀번호를 다시 확인해주세요.');
+    }
+
   },
 
   login: function() {

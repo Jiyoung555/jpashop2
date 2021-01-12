@@ -35,7 +35,7 @@ public class Cart {
 
     private LocalDateTime cartDate;
 
-    //@Enumerated(EnumType.STRING)
+    @Enumerated(EnumType.STRING)//추가후 DB drop 또 해야됨
     private OrderStatus status;
 
     //==================

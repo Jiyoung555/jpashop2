@@ -18,7 +18,7 @@ public class Member {
     @Column(name = "member_id") //테이블에서의 컬럼명
     private Long id;
 
-    @Column
+    @Column//JPA UNIQUE COLUMN설정하기!!
     private String email;
     @Column
     private String password;

@@ -1,5 +1,6 @@
 package com.example.jpashop2.service;
 import com.example.jpashop2.domain.*;
+import com.example.jpashop2.dto.OrderSearch;
 import com.example.jpashop2.repository.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -132,12 +133,12 @@ public class OrderService {
         }
 
 
-        //사용x
-        //@Transactional(readOnly = true)//위로 뺌
-        public List<Order> findMyOrders(Long memberId){
-            List<Order> myOrderList = orderRepository.findByMemberId(memberId);
-            return myOrderList;
-        }
+//        //사용x
+//        //@Transactional(readOnly = true)//위로 뺌
+//        public List<Order> findMyOrders(Long memberId){
+//            List<Order> myOrderList = orderRepository.findByMemberId(memberId);
+//            return myOrderList;
+//        }
 
 
         //@Transactional(readOnly = true)//위로 뺌
@@ -146,14 +147,16 @@ public class OrderService {
         }
 
 
-
-
-
-        /*
-        //[참고] Order 주문 검색
-        public List<Order> findOrders(OrderSearch orderSearch) {
-            return orderRepository.findAll(orderSearch);
+        //오더 전체 조회(어드민)
+        //@Transactional(readOnly = true)//위로 뺌
+        public List<Order> findOrders() {
+            return orderRepository.findAll();
         }
-        */
+
+        //[참고] Order 주문 검색
+        public List<Order> findOrdersBySearch(OrderSearch orderSearch) {//메소드명 findOrders에서 바꿈
+            return orderRepository.findAllBySearch(orderSearch);
+        }
+
 
 }

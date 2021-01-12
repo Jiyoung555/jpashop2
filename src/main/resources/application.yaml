@@ -23,6 +23,7 @@ spring:
       #[수정x]엔티티 수정한 경우, create로 바꾸면, 데이터만 초기화되고, 테이블 구조는 그대로
       #[수정o]다 drop후, 다시 create (TABLE "~" not found 떠도 무시) -> none 해야할 듯
       #[drop]drop table cart, cart_item, category, category_item, delivery, item, member, orders, order_item; commit;
+      #[수정o NEW]엔티티 수정한 경우, create-drop 한 후 (안에 데이터 다 사라지나, 테이블은 그대로)  -> 다시 none으로
 
     properties:
       hibernate:

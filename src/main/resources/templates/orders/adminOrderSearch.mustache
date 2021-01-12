@@ -1,0 +1,65 @@
+{{>head}}
+
+
+<div class="account-label">
+    <h4>오더 검색 목록</h4>
+</div>
+
+
+<!-- 검색 화면 -->
+<div>
+    <form method="post" action="/orderSearch"> <!--js없이-->
+        <select id="searchType" name="searchType">
+            <option value="">검색조건</option>
+            <option value="member_name">회원이름</option>
+            <option value="orderStatus">주문상태</option>
+        </select>
+
+        <input class="form-control" type="text" id="searchKeyword" name="searchKeyword"/>
+
+        <button id="orderSearchBtn" type="submit" class="btn btn-primary">검색</button>
+    </form>
+
+</div>
+
+<!-- 테이블-->
+<div class="account-mid">
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th>주문번호</th>
+            <th>주문일</th>
+            <th>주문상태</th>
+
+            <th>회원이메일</th>
+            <th>회원이름</th>
+
+            <th>배송상태</th>
+
+            <th>주문상품명</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        {{#searchOrderDetail}}
+            <tr>
+                <td><a href="/orderShow/{{orderId}}">{{orderId}}</a></td>
+                <td>{{orderDate}}</td>
+                <td>{{orderStatus}}</td>
+
+                <td>{{email}}</td>
+                <td>{{member_name}}</td>
+
+                <td>{{deliveryStatus}}</td>
+
+                <td>{{nameArr}}</td>
+            </tr>
+        {{/searchOrderDetail}}
+        </tbody>
+    </table>
+</div>
+
+
+<script src = "/js/app/common/order.js"></script>
+
+{{>footer}}

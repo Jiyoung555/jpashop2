@@ -17,6 +17,9 @@
         <div class="form-group">
             <label>비밀번호</label>
             <input class="form-control"id="join-pwd" type="password">
+
+            <label>비밀번호확인</label>
+            <input class="form-control"id="join-pwd-2" type="password">
         </div>
 
         <div class="form-group">
@@ -38,6 +41,8 @@
             <input placeholder="도로명 주소" name="addr1" id="addr1" type="text" onclick="execPostCode()" readonly="readonly" />
             <input placeholder="상세주소" name="addr2" id="addr2" type="text" />
         </div>
+
+        <input type="hidden" id="idCheckOrNot" value="false">
 
         <button class="btn btn-primary" type="button" id="join-btn">제출</button><!--js제출-->
     </form>

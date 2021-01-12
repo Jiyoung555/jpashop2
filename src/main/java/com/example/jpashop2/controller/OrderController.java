@@ -1,6 +1,7 @@
 package com.example.jpashop2.controller;
 import com.example.jpashop2.domain.*;
 import com.example.jpashop2.dto.MyOrdersDTO;
+import com.example.jpashop2.dto.OrderSearch;
 import com.example.jpashop2.service.MemberService;
 import com.example.jpashop2.service.OrderService;
 import lombok.RequiredArgsConstructor;
@@ -9,6 +10,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
@@ -32,7 +36,6 @@ public class OrderController {
         List<MyOrdersDTO> myOrderDetail = new ArrayList<>();//리스트 틀
         //List<String> mathArr = new ArrayList<>();//**
 
-
         for(int i = 0; i < myOrders.size(); i++){
             Order order = myOrders.get(i);
             Delivery delivery = order.getDelivery();
@@ -52,8 +55,6 @@ public class OrderController {
             myOrderDetail.add(myOrder);
         }
 
-
-
         model.addAttribute("myOrderDetail", myOrderDetail);
         //model.addAttribute("math", math);
         return "orders/orderList";
@@ -70,16 +71,118 @@ public class OrderController {
             int orderPrice = orderItems.get(k).getOrderPrice();//**
             int count = orderItems.get(k).getCount();
             System.out.println("가격 : " + orderPrice);
-            //String math = orderPrice + "원x" + count +"개";
-            //mathArr.add(math);
             math += "(" + orderPrice + "원x" + count +"개)" ;
         }
 
-        MyOrdersDTO myOrder = new MyOrdersDTO(order, delivery, orderItems, math);//**math 아직 정의는 안 함..
+        MyOrdersDTO myOrder = new MyOrdersDTO(order, delivery, orderItems, math);
         model.addAttribute("myOrder", myOrder);
         return "orders/orderShow";
     }
 
+
+    @GetMapping("/admin/order")
+    public String adminOrderList(Model model){
+        List<Order> orders = orderService.findOrders();
+        List<MyOrdersDTO> everyOrderDetail = new ArrayList<>();//리스트 틀 (워딩은 MyOrdersDTO지만, 모든 회원의 오더)
+
+        for(int i = 0; i < orders.size(); i++){
+            Order order = orders.get(i);
+
+            //어드민용
+            Long memberId = order.getMember().getId();
+            String email = order.getMember().getEmail();
+            String member_name = order.getMember().getName();
+            Member member = new Member();
+            member.setId(memberId);
+            member.setEmail(email);
+            member.setName(member_name);
+
+            Delivery delivery = order.getDelivery();
+            List<OrderItem> orderItems = order.getOrderItems();
+
+            String math = "";
+            for(int k = 0; k < orderItems.size(); k++) {
+                int orderPrice = orderItems.get(k).getOrderPrice();
+                int count = orderItems.get(k).getCount();
+                System.out.println("가격 : " + orderPrice);
+                math += "(" + orderPrice + "원x" + count +"개)" ;
+            }
+            System.out.println("math : " + math);
+            MyOrdersDTO everyOrder = new MyOrdersDTO(order, member, delivery, orderItems, math);
+            everyOrderDetail.add(everyOrder);
+        }
+
+        model.addAttribute("everyOrderDetail", everyOrderDetail);
+        return "orders/adminOrderList";
+    }
+
+
+    @GetMapping("/admin/orderShow/{orderId}")
+    public String adminOrderShow(@PathVariable Long orderId, Model model){
+        Order order = orderService.findOne(orderId);
+        //어드민용
+        Long memberId = order.getMember().getId();
+        String email = order.getMember().getEmail();
+        String member_name = order.getMember().getName();
+        Member member = new Member();
+        member.setId(memberId);
+        member.setEmail(email);
+        member.setName(member_name);
+
+        Delivery delivery = order.getDelivery();
+        List<OrderItem> orderItems = order.getOrderItems();
+
+        String math = "";
+        for(int k = 0; k < orderItems.size(); k++) {
+            int orderPrice = orderItems.get(k).getOrderPrice();//**
+            int count = orderItems.get(k).getCount();
+            System.out.println("가격 : " + orderPrice);
+            math += "(" + orderPrice + "원x" + count +"개)" ;
+        }
+
+        MyOrdersDTO oneOrder = new MyOrdersDTO(order, member, delivery, orderItems, math);
+        model.addAttribute("oneOrder", oneOrder);
+        return "orders/adminOrderShow";
+    }
+
+
+    //검색 결과 보여줌
+    @PostMapping("/admin/orderSearch")
+    public String orderSearch(OrderSearch orderSearch, Model model){
+        log.info("검색값 : " + orderSearch.getSearchType(), orderSearch.getSearchKeyword());
+        List<Order> orders = orderService.findOrdersBySearch(orderSearch);
+
+        List<MyOrdersDTO> searchOrderDetail = new ArrayList<>();//리스트 틀
+        for(int i = 0; i < orders.size(); i++){
+            Order order = orders.get(i);
+
+            //어드민용
+            Long memberId = order.getMember().getId();
+            String email = order.getMember().getEmail();
+            String member_name = order.getMember().getName();
+            Member member = new Member();
+            member.setId(memberId);
+            member.setEmail(email);
+            member.setName(member_name);
+
+            Delivery delivery = order.getDelivery();
+            List<OrderItem> orderItems = order.getOrderItems();
+
+            String math = "";
+            for(int k = 0; k < orderItems.size(); k++) {
+                int orderPrice = orderItems.get(k).getOrderPrice();
+                int count = orderItems.get(k).getCount();
+                System.out.println("가격 : " + orderPrice);
+                math += "(" + orderPrice + "원x" + count +"개)" ;
+            }
+            System.out.println("math : " + math);
+            MyOrdersDTO everyOrder = new MyOrdersDTO(order, member, delivery, orderItems, math);
+            searchOrderDetail.add(everyOrder);
+        }
+
+        model.addAttribute("searchOrderDetail", searchOrderDetail);
+        return "orders/adminOrderSearch";
+    }
 
 
 }

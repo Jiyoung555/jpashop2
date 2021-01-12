@@ -15,6 +15,10 @@ public class MyOrdersDTO {
     LocalDateTime orderDate;
     OrderStatus orderStatus;//@Enumerated(EnumType.STRING)
 
+    Long memberId;//member정보 (adminOrderList 조회시에만 사용)
+    String email;
+    String member_name;
+
     Long deliveryId;
     DeliveryStatus deliveryStatus;
     String zipcode;//address
@@ -37,6 +41,7 @@ public class MyOrdersDTO {
 
     String math = ""; //여러 아이템의 가격 x 수량
 
+    //생성자1
     public MyOrdersDTO(Order order, Delivery delivery, List<OrderItem> orderItems, String math) {
         this.orderId = order.getId();
         this.orderDate = order.getOrderDate();
@@ -73,6 +78,37 @@ public class MyOrdersDTO {
 //        }
     }
 
+
+    //생성자2_어드민용
+    public MyOrdersDTO(Order order, Member member, Delivery delivery, List<OrderItem> orderItems, String math) {
+        this.orderId = order.getId();
+        this.orderDate = order.getOrderDate();
+        this.orderStatus = order.getStatus();
+
+        this.memberId = member.getId();
+        this.email = member.getEmail();
+        this.member_name = member.getName();
+
+        this.deliveryId = delivery.getId();
+        this.deliveryStatus = delivery.getStatus();
+        this.zipcode = delivery.getAddress().getZipcode();
+        this.addr1 = delivery.getAddress().getAddr1();
+        this.addr2 = delivery.getAddress().getAddr2();
+
+        for(int i = 0; i < orderItems.size(); i++){
+            OrderItem orderItem = orderItems.get(i);
+            this.orderItemIdArr.add(orderItem.getId());
+            this.orderPriceArr.add(orderItem.getOrderPrice());
+            this.countArr.add(orderItem.getCount());
+
+            this.totalPrice += orderItem.getTotalPrice();
+
+            this.nameArr.add(orderItem.getItem().getName());//item
+            this.imageNameArr.add(orderItem.getItem().getImagename());
+        }
+
+        this.math = math;
+    }
 
 
 }

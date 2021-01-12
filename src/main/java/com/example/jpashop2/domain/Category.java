@@ -37,8 +37,6 @@ public class Category {
 //    private List<Item> items = new ArrayList<>();
 
 
-
-
     //===이 Category 클래스는, 부모도 가지고, 자식도 가짐===
 
     //이 카테고리의, 상위 부모 카테고리

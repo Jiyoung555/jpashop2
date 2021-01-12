@@ -1,0 +1,76 @@
+{{>head}}
+
+<div class="orderShow-label">
+    <h4>Order 상세보기 (어드민)</h4>
+</div>
+
+<div class="orderShow-btns">
+    <a href="/order" class="btn btn-list">목록</a>
+    <a href="/orderEdit/{{oneOrder.orderId}}" class="btn btn-edit">수정</a>
+    <button class="btn" id="order-destroy-btn">삭제</button> <!--js-->
+</div>
+
+<div class="orderShow-table">
+    <table class="table table-hover">
+        <tbody>
+        {{#oneOrder}}
+            <tr>
+                <th>주문번호</th>
+                <td>{{orderId}}</td>
+            </tr>
+
+            <tr>
+                <th>주문날짜</th>
+                <td>{{orderDate}}</td>
+            </tr>
+
+            <tr>
+                <th>주문상태</th>
+                <td>{{orderStatus}}</td>
+            </tr>
+
+            <!------------------------------------>
+            <tr>
+                <th>회원번호</th>
+                <td>{{memberId}}</td>
+            </tr>
+
+            <tr>
+                <th>회원 이메일</th>
+                <td>{{email}}</td>
+            </tr>
+
+            <tr>
+                <th>회원이름</th>
+                <td>{{member_name}}</td>
+            </tr>
+
+            <!------------------------------------>
+            <tr>
+                <th>배송지</th>
+                <td>[{{zipcode}}] {{addr1}}, {{addr2}}</td>
+            </tr>
+
+            <tr>
+                <th>배송상태</th>
+                <td>{{deliveryStatus}}</td>
+            </tr>
+            <!------------------------------------>
+            <tr>
+                <th>상품명</th>
+                <td>{{nameArr}}</td>
+            </tr>
+
+            <tr>
+                <th>총 가격</th>
+                <td>{{totalPrice}}원 {{math}}</td>
+            </tr>
+
+        {{/oneOrder}}
+        </tbody>
+    </table>
+</div>
+
+
+
+{{>footer}}

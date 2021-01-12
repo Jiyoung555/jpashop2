@@ -1,4 +1,3 @@
-
 function idCheck(){ //아이디 중복 확인으로 이동
 	//window.open : 새창 열기 (팝업창)
 	window.open('/idCheck_Form',

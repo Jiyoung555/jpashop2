@@ -1,11 +1,9 @@
 package com.example.jpashop2.api;
 
-import com.example.jpashop2.domain.Cart;
-import com.example.jpashop2.domain.CartItem;
-import com.example.jpashop2.domain.Item;
-import com.example.jpashop2.domain.Member;
+import com.example.jpashop2.domain.*;
 import com.example.jpashop2.dto.CartForm;
 import com.example.jpashop2.dto.OrderForm;
+import com.example.jpashop2.dto.OrderSearch;
 import com.example.jpashop2.service.CartService;
 import com.example.jpashop2.service.MemberService;
 import com.example.jpashop2.service.OrderService;
@@ -124,6 +122,12 @@ public class OrderApiController {
     }
 
 
+//    @PostMapping("/api/orderSearch")
+//    public void orderSearch(@RequestBody OrderSearch orderSearch){
+//        log.info("검색값 : " + orderSearch.getSearchType(), orderSearch.getSearchKeyword());
+//        List<Order> orders = orderService.findOrdersBySearch(orderSearch);
+//        log.info("결과값 : " + orders);
+//    }
 
 
 

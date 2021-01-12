@@ -8,6 +8,8 @@ var order = {
         const cartOrderBtn = document.querySelector('#cart_order_btn');//cart 목록
         const checkOrderBtn = document.querySelector('#check_order_btn');//cart 체크박스
 
+        const orderSearchBtn = document.querySelector('#orderSearchBtn');//adminOrderList 검색버튼
+
         if (cartDestroyBtn != null) {
           cartDestroyBtn.addEventListener('click', _this.cartDestroy);
         }
@@ -20,6 +22,10 @@ var order = {
         }
         if (checkOrderBtn != null) {
           checkOrderBtn.addEventListener('click', _this.checkOrder);
+        }
+
+        if (orderSearchBtn != null) {
+          orderSearchBtn.addEventListener('click', _this.search);
         }
 
     },
@@ -115,7 +121,6 @@ var order = {
           cartIdArr
         };
 
-
         if (count == 0) { //체크한 개수 0개
             alert("결제할 상품을 선택해 주세요");
 
@@ -152,7 +157,38 @@ var order = {
 
             });
         }//if~else
-    }//end method
+    },//end method
+
+
+//    //adminOrderList에서 검색 -> ajax 없이 하기로 바꿈 (그럼 tbody tr 부분 싹 지우고, 다시 html 코드로 하나하나 추가해야해서)
+//    search: function() {
+//        var data = {
+//          searchType: document.querySelector('#searchType').value,
+//          searchKeyword: document.querySelector('#searchKeyword').value
+//        };
+//
+//        console.log(data.searchType);
+//        console.log(data.searchKeyword);
+//
+//        fetch('/api/orderSearch', {
+//          method: 'POST',
+//          body: JSON.stringify(data),
+//          headers: {
+//            'Content-Type': 'application/json'
+//          }
+//        }).then(function(response) {
+//
+//          //TO DO: 여기 수정!! 검색 성공시, orderList에서 검색한 결과만 보여주게끔
+//          if (response.ok) {
+//            alert('검색 성공');
+//            window.location.href='/admin/order';
+//            //window.location.reload=true;
+//          } else {
+//            alert('검색 실패');
+//          }
+//
+//        });
+//    }
 
 
     // 메소드 추가시 여기서부터
