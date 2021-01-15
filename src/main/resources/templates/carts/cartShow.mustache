@@ -12,7 +12,9 @@
     <button class="btn" id="cart-destroy-btn">삭제</button> <!--js-->
 </div>
 
+<form>
 <div class="cartShow-table">
+
     <table class="table table-hover">
         <tbody>
         {{#myCart}}
@@ -46,11 +48,20 @@
                 <td><img src="/uploads2/{{imageName}}" alt=""></td>
             </tr>
 
+            <tr>
+                <th>#</th>
+                <input type="hidden" id="cart_id" value="{{cartId}}">
+                <td><button type="button" id="cart_order_btn">구매하기</button></td>
+            </tr>
+
+
 
         {{/myCart}}
         </tbody>
     </table>
+
 </div>
+</form>
 
 
 <script src = "/js/app/common/order.js"></script>

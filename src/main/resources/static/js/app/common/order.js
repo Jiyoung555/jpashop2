@@ -5,8 +5,8 @@ var order = {
         const cartDestroyBtn = document.querySelector('#cart-destroy-btn');//cartShow
         const destroyBtn = document.querySelector('#order-destroy-btn');//orderShow
 
-        const cartOrderBtn = document.querySelector('#cart_order_btn');//cart 목록
-        const checkOrderBtn = document.querySelector('#check_order_btn');//cart 체크박스
+        const cartOrderBtn = document.querySelector('#cart_order_btn');//cart 목록에서, cartShow에서 1개 구매
+        const checkOrderBtn = document.querySelector('#cartCheck_order_btn');//cart 체크박스
 
         const orderSearchBtn = document.querySelector('#orderSearchBtn');//adminOrderList 검색버튼
 
@@ -68,6 +68,9 @@ var order = {
         var data = {
           cartId: document.querySelector('#cart_id').value
         };
+
+        console.log(data.cartId);
+
         fetch('/api/cartToOrder', {
           method: 'POST',
           body: JSON.stringify(data),

@@ -34,7 +34,6 @@ public class OrderController {
         //Iterable<Order> myOrderList = orderService.findMyOrders(memberId); //안됨
 
         List<MyOrdersDTO> myOrderDetail = new ArrayList<>();//리스트 틀
-        //List<String> mathArr = new ArrayList<>();//**
 
         for(int i = 0; i < myOrders.size(); i++){
             Order order = myOrders.get(i);
@@ -46,8 +45,6 @@ public class OrderController {
                 int orderPrice = orderItems.get(k).getOrderPrice();//**
                 int count = orderItems.get(k).getCount();
                 System.out.println("가격 : " + orderPrice);
-                //String math = orderPrice + "원x" + count +"개";
-                //mathArr.add(math);
                 math += "(" + orderPrice + "원x" + count +"개)" ;
             }
             System.out.println("math : " + math);
@@ -56,7 +53,6 @@ public class OrderController {
         }
 
         model.addAttribute("myOrderDetail", myOrderDetail);
-        //model.addAttribute("math", math);
         return "orders/orderList";
     }
 
@@ -149,7 +145,9 @@ public class OrderController {
     //검색 결과 보여줌
     @PostMapping("/admin/orderSearch")
     public String orderSearch(OrderSearch orderSearch, Model model){
-        log.info("검색값 : " + orderSearch.getSearchType(), orderSearch.getSearchKeyword());
+        log.info("검색타입 : " + orderSearch.getSearchType());
+        log.info("검색키워드 : " + orderSearch.getSearchKeyword());
+
         List<Order> orders = orderService.findOrdersBySearch(orderSearch);
 
         List<MyOrdersDTO> searchOrderDetail = new ArrayList<>();//리스트 틀

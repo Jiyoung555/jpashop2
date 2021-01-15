@@ -2,13 +2,16 @@ package com.example.jpashop2.repository;
 import com.example.jpashop2.domain.Member;
 import com.example.jpashop2.domain.Order;
 import com.example.jpashop2.domain.OrderItem;
+import com.example.jpashop2.domain.OrderStatus;
 import com.example.jpashop2.dto.OrderSearch;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
 import javax.persistence.EntityManager;
 import java.util.ArrayList;
 import java.util.List;
 
+@Slf4j
 @Repository
 @RequiredArgsConstructor
 public class OrderRepository {
@@ -58,13 +61,27 @@ public class OrderRepository {
                     .setMaxResults(1000) // 최대 1000건
                     .getResultList();
 
-        } else if (searchType.equals("orderStatus")) { //Q. 왜 안 되지??
-            orders = em.createQuery("select o from Order o where o.status = :status",
-                    Order.class)
-                    .setParameter("status", orderSearch.getSearchKeyword())
-//                    .setFirstResult(0) // 페이징 시 사용
+        } else if (searchType.equals("orderStatus")) {
+            String keyword = orderSearch.getSearchKeyword();
+            keyword = keyword.toUpperCase();//대문자 처리해야 검색됨
+
+            if(keyword.equals("ORDERED")) {
+                orders = em.createQuery("select o from Order o where o.status = : status", Order.class)
+                        .setParameter("status", OrderStatus.ORDERED) //이넘값은 이렇게 써야함함
+//                   .setFirstResult(0) // 페이징 시 사용
 //                    .setMaxResults(1000) // 최대 1000건
-                    .getResultList();
+                        .getResultList();
+
+            } else if(keyword.equals("CANCELED")) {
+                orders = em.createQuery("select o from Order o where o.status = : status", Order.class)
+                        .setParameter("status", OrderStatus.CANCELED)
+//                   .setFirstResult(0) // 페이징 시 사용
+//                    .setMaxResults(1000) // 최대 1000건
+                        .getResultList();
+            }
+
+
+
         }
 
         return orders;

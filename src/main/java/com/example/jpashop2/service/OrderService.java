@@ -52,7 +52,7 @@ public class OrderService {
     }
 
 
-    //Cart -> Orde
+    //아이템 1개만 구매하는 경우
     @Transactional
     public Long cartToOrder(Long cartId, Long memberId, Long itemId, int count) {
         //Member, Item 엔티티 조회
@@ -130,7 +130,7 @@ public class OrderService {
         -구글링 : jpa Dirty Checking
         */
         //orderRepository.save(order);
-        }
+    }
 
 
 //        //사용x
@@ -141,22 +141,22 @@ public class OrderService {
 //        }
 
 
-        //@Transactional(readOnly = true)//위로 뺌
-        public Order findOne(Long orderId) {
-            return orderRepository.findOne(orderId);
-        }
+    //@Transactional(readOnly = true)//위로 뺌
+    public Order findOne(Long orderId) {
+        return orderRepository.findOne(orderId);
+    }
 
 
-        //오더 전체 조회(어드민)
-        //@Transactional(readOnly = true)//위로 뺌
-        public List<Order> findOrders() {
-            return orderRepository.findAll();
-        }
+    //오더 전체 조회(어드민)
+    //@Transactional(readOnly = true)//위로 뺌
+    public List<Order> findOrders() {
+        return orderRepository.findAll();
+    }
 
-        //[참고] Order 주문 검색
-        public List<Order> findOrdersBySearch(OrderSearch orderSearch) {//메소드명 findOrders에서 바꿈
-            return orderRepository.findAllBySearch(orderSearch);
-        }
+    //[참고] Order 주문 검색
+    public List<Order> findOrdersBySearch(OrderSearch orderSearch) {//메소드명 findOrders에서 바꿈
+        return orderRepository.findAllBySearch(orderSearch);
+    }
 
 
 }

@@ -4,7 +4,7 @@ var store = {
 
         const cartBtn = document.querySelector('#store_cart_btn'); //storeShow 장바구니 버튼
         const orderBtn = document.querySelector('#store_order_btn'); //storeShow 구매하기 버튼
-        const checkOrderBtn = document.querySelector('#check_order_btn'); //store 체크박스 구매하기 버튼
+        const checkOrderBtn = document.querySelector('#storeCheck_order_btn'); //store 체크박스 구매하기 버튼
 
         if (cartBtn != null) {
           cartBtn.addEventListener('click', _this.cart);
@@ -93,7 +93,6 @@ var store = {
         });
     },
 
-    //안됨
     checkOrder: function() {
         var itemIds = document.getElementsByName("checkbox");
         var itemIdArr = new Array(); //**

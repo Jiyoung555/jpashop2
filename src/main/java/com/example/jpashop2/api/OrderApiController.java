@@ -67,7 +67,7 @@ public class OrderApiController {
 
     }
 
-    //cartList에서 체크한 거 주문하기
+    //cartList에서 체크한 여러 개 주문하기
     @PostMapping("/api/checkedCartToOrder")
     public Long checkedCartToOrder(@RequestBody OrderForm form) {
         log.info("form : " + form);
@@ -101,6 +101,7 @@ public class OrderApiController {
         //return "fail";//실패
     }
 
+    //아이템 1개 주문하는 경우 (cartShow / cartList에서 개당 구매)
     @PostMapping("/api/cartToOrder")
     public String cartToOrder(@RequestBody CartForm form){
         log.info("form : " + form.toString());
@@ -114,7 +115,7 @@ public class OrderApiController {
             Long itemId = cartItem.getItem().getId();//**
             int count = cartItem.getCartCount();//**
 
-            orderService.cartToOrder(cartId, memberId, itemId, count);//이건 cart당 상품 1개인 경우라서...
+            orderService.cartToOrder(cartId, memberId, itemId, count);//이건 상품 1개인 경우
             return "success";
         }
 
