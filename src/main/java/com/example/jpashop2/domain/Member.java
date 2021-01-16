@@ -1,5 +1,6 @@
 package com.example.jpashop2.domain;
 import lombok.*;
+import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -37,4 +38,6 @@ public class Member {
 
     @OneToMany(mappedBy = "member")
     private List<Cart> carts = new ArrayList<>();
+
+
 }

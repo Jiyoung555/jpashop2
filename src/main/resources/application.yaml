@@ -1,4 +1,7 @@
 spring:
+  profiles:
+    include: oauth
+
   h2:  #기존에 적었던 코드네요. 참고로, devtools 라이브러리 설치시, 이 3줄은 안 적어도 됨
     console:
       enabled: true

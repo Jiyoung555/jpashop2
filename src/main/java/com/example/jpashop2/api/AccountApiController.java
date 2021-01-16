@@ -7,6 +7,8 @@ import com.example.jpashop2.repository.MemberRepository;
 import com.example.jpashop2.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -19,6 +21,8 @@ import java.util.List;
 @RequiredArgsConstructor
 @RestController
 public class AccountApiController {
+    @Autowired
+    private BCryptPasswordEncoder passwordEncoder; //시큐리티에서 빈(Bean). SecurityConfig에 생성해뒀음 //회원가입시 사용
 
     private final MemberRepository memberRepository;
     private final MemberService memberService;
@@ -41,9 +45,13 @@ public class AccountApiController {
     public Long signUpSubmit(@RequestBody MemberForm memberForm) {
         System.out.println("memberForm : " + memberForm);
 
+        memberForm.setPassword(passwordEncoder.encode(memberForm.getPassword()));
+        //비밀번호 암호화돼서 DB 저장됨!
+
         Member member = memberForm.toMember();
         Address address = memberForm.toAddress();
         member.setAddress(address);
+
         System.out.println("member : " + member);
 
         return memberService.join(member);

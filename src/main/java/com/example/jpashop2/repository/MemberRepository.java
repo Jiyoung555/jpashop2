@@ -29,6 +29,7 @@ public class MemberRepository {//extends 안하는 방법으로 해봅시다 //�
         //EntityManager의 find 메소드 사용 //파라미터 두개(엔티티 클래스 형태로 받기, PK를 통해 꺼냄)
     }
 
+
     //멤버 모두 조회
     public List<Member> findAll() {
         return em.createQuery("select m from Member m", Member.class)
