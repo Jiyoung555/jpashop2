@@ -12,6 +12,8 @@ public interface UserRepository extends JpaRepository<Member, Long> {
     //findByName이라고 해야됨 (findByUserName 이런 식으로 안 됨)
     //Member엔티티의 name 필드를 통해 찾아오는 거임**
 
+    Optional<Member> findByEmail(String email); //테스트..
+
 
 }
 

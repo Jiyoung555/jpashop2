@@ -42,7 +42,7 @@ public class OrderRepository {
     public List<Order> findAll() {
         return em.createQuery("select o from Order o", Order.class)
                 .getResultList();
-        //Order -> Orders 해야하나??
+        //Order -> Orders 해야하나?? 아니오
     }
 
 
@@ -81,11 +81,9 @@ public class OrderRepository {
             }
 
 
-
         }
 
         return orders;
-
 
 //        //TO DO: 추후 QueryDSL로 변경!
 //        return em.createQuery("select o from Order o join o.member m" +
@@ -98,7 +96,5 @@ public class OrderRepository {
 //                .getResultList();
 
     }
-
-
 
 }

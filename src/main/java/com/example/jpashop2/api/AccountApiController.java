@@ -61,13 +61,13 @@ public class AccountApiController {
     }
 
 
-    //로그인 form 제출
-    @PostMapping("/api/login")
-    public String loginAuth(@RequestBody MemberForm memberForm, HttpSession httpSession) {
-        log.info("memberForm : " + memberForm);
-        String result = memberService.login(memberForm, httpSession);
-        return result;
-    }
+//    //로그인 form 제출 (js 없이로 수정중..)
+//    @PostMapping("/api/login")
+//    public String loginAuth(@RequestBody MemberForm memberForm, HttpSession httpSession) {
+//        log.info("memberForm : " + memberForm);
+//        String result = memberService.login(memberForm, httpSession);
+//        return result;
+//    }
 
 
 

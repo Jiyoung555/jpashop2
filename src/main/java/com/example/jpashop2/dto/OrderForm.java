@@ -29,10 +29,10 @@ public class OrderForm {
     int count;
     Long memberId;
 
-    //cartList에서 체크한 거
+    //1. cartList에서 체크한 거
     ArrayList<Long> cartIdArr;
 
-    //store에서 체크한 거
+    //2. store에서 체크한 거
     ArrayList<Long> itemIdArr;
 
     public Member toMember() {
@@ -48,6 +48,4 @@ public class OrderForm {
         //orderItem.setCount(count);
         return orderItem;
     }
-
-
 }

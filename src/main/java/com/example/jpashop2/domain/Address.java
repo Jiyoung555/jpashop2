@@ -9,7 +9,7 @@ import javax.persistence.Embeddable;
 //이 Address 클래스가 하나의 객체처럼 묶여서, Member 엔티티에 들어가짐
 @Getter
 @Setter
-@ToString//여기부터 내가 추가함.. 테스트
+@ToString
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder

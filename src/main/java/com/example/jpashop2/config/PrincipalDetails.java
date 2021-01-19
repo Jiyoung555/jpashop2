@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 public class PrincipalDetails implements UserDetails {
+
     private Member member;
     //private MemberForm form;
 
@@ -16,7 +17,8 @@ public class PrincipalDetails implements UserDetails {
     }
 
     //해당 유저의 권한을 가져오는 메소드
-    @Override public Collection<? extends GrantedAuthority> getAuthorities() {
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
         Collection<GrantedAuthority> authorities = new ArrayList<>();
         authorities.add(new SimpleGrantedAuthority(member.getRole()));
         return authorities;
@@ -30,7 +32,7 @@ public class PrincipalDetails implements UserDetails {
 
     @Override
     public String getUsername() {
-        return member.getName();
+        return member.getEmail();
     }
 
     //계정 만료 확인

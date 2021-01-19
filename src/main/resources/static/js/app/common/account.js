@@ -24,6 +24,7 @@ var account = {
     }
   },
 
+
   join: function() { //**추후 빈칸 불가 추가
     // form 데이터를 JSON으로 만듬
     var data = {
@@ -85,47 +86,48 @@ var account = {
 
   },
 
-  login: function() {
-    // form 데이터를 JSON으로 만듬
-    var data = {
-      email: document.querySelector('#login-email').value,
-      password: document.querySelector('#login-pwd').value,
-    };
-
-    fetch('/api/login', {
-      method: 'POST',
-      body: JSON.stringify(data),
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    }).then(function(response) {
-
-        if (response.ok) { //컨트롤러 return값 받으면
-            response.text().then(function(aaa){
-                //response.text()를 통해, 컨트롤러에서 return한 텍스트 꺼내옴
-                //이걸 통해, 함수 실행함. 파라미터는, 방금 꺼낸 텍스트(aaa라 부르겠음)
-                console.log(aaa);
-
-                if(aaa == 'noMember') {
-                  alert('없는 회원입니다.');
-                }
-                if(aaa == 'wrongPwd') {
-                  alert('틀린 비밀번호입니다.');
-                }
-                if(aaa == 'loginSuccess') {
-                  alert('로그인 성공');
-                  window.location.href='/login'; //일단 새로고침
-                }
-            })
-
-        } else {//컨트롤러 return값 못 받으면
-          alert('에러 발생. 다시 시도해 주세요.');
-        }
-
-
-
-    });
-  },
+    //js없이 로그인 수정중..
+//  login: function() {
+//    // form 데이터를 JSON으로 만듬
+//    var data = {
+//      email: document.querySelector('#login-email').value,
+//      password: document.querySelector('#login-pwd').value,
+//    };
+//
+//    fetch('/api/login', {
+//      method: 'POST',
+//      body: JSON.stringify(data),
+//      headers: {
+//        'Content-Type': 'application/json'
+//      }
+//    }).then(function(response) {
+//
+//        if (response.ok) { //컨트롤러 return값 받으면
+//            response.text().then(function(aaa){
+//                //response.text()를 통해, 컨트롤러에서 return한 텍스트 꺼내옴
+//                //이걸 통해, 함수 실행함. 파라미터는, 방금 꺼낸 텍스트(aaa라 부르겠음)
+//                console.log(aaa);
+//
+//                if(aaa == 'noMember') {
+//                  alert('없는 회원입니다.');
+//                }
+//                if(aaa == 'wrongPwd') {
+//                  alert('틀린 비밀번호입니다.');
+//                }
+//                if(aaa == 'loginSuccess') {
+//                  alert('로그인 성공');
+//                  window.location.href='/login'; //일단 새로고침
+//                }
+//            })
+//
+//        } else {//컨트롤러 return값 못 받으면
+//          alert('에러 발생. 다시 시도해 주세요.');
+//        }
+//
+//
+//
+//    });
+//  },
 
     // 수정 메소드
     memberUpdate: function() {

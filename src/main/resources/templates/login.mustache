@@ -3,10 +3,11 @@
 <div class="loginForm">
     <p>로그인</p>
 
-    <form>
+    <form method="post" action="/loginAuth"> <!--js없이 수정중..-->
         <div class="form-group">
             <label>이메일</label>
             <input class="form-control" name="email" id="login-email" type="email">
+            <!--이메일 형식 검증은, ajax 제출시 안 되고, form data만 되네-->
         </div>
 
         <div class="form-group">
@@ -17,7 +18,7 @@
         <!-- ★ (나중에?? 확인중..) 스프링 시큐리티 보안 처리용 입력 값 -->
         <input type="hidden" name="_csrf" value="{{#_csrf}}token{{/_csrf}}">
 
-        <button class="btn btn-primary" type="button" id="login-btn">제출</button>
+        <button class="btn btn-primary" type="submit" id="login-btn">제출</button>
     </form>
 </div>
 

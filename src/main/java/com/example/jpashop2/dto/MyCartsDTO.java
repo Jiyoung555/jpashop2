@@ -37,11 +37,6 @@ public class MyCartsDTO {
             this.imageName = cartItem.getItem().getImagename();
         }
     }
-
-
-
-
-
 }
 
 

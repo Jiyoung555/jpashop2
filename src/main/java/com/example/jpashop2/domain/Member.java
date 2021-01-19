@@ -4,11 +4,12 @@ import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 @Entity
 @Getter
-@Setter
+@Setter//보통 entity는 누가 함부로 못 바꾸게, 세터 안 만들지만
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
@@ -35,9 +36,11 @@ public class Member {
 
     @OneToMany(mappedBy = "member")
     private List<Order> orders = new ArrayList<>();
+    //여기는 주인이 아님. 따라서 FK는 주인 Order에 추가한 member에서 관리하겠다
 
     @OneToMany(mappedBy = "member")
     private List<Cart> carts = new ArrayList<>();
+
 
 
 }

@@ -10,4 +10,11 @@ public class Jpashop2Application {
 		SpringApplication.run(Jpashop2Application.class, args);
 	}
 
+
+
+
+
+
+
+
 }

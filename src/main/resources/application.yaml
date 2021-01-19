@@ -19,14 +19,12 @@ spring:
   jpa:
     hibernate:
       ddl-auto: none
-      #none: 테이블 자동생성 x
-      #create: 엔티티 클래스대로 DB에 테이블 생성 (서버 재시작시, 다 지우고 다시 생성)
-      #update: 엔티티 클래스대로 DB에 테이블 생성. 엔티티 클래스 바뀐 거 있으면, 테이블 수정
-      #[최초]update로 테이블 생성후 -> none으로 수정
-      #[수정x]엔티티 수정한 경우, create로 바꾸면, 데이터만 초기화되고, 테이블 구조는 그대로
-      #[수정o]다 drop후, 다시 create (TABLE "~" not found 떠도 무시) -> none 해야할 듯
+      #none: @Entity 테이블 자동생성 x
+      #create: 엔티티 클래스대로 DB에 테이블 생성 (서버 재시작시, 테이블 구조는 그대로, 데이터는 초기화됨)
+      #update: 엔티티 클래스대로 DB에 테이블 생성. 엔티티 클래스 바뀐 거 있으면, 테이블 수정 (안 되는데..)
+      #[엔티티 수정시-1] DB에서 다 drop후, 다시 create -> none
       #[drop]drop table cart, cart_item, category, category_item, delivery, item, member, orders, order_item; commit;
-      #[수정o NEW]엔티티 수정한 경우, create-drop 한 후 (안에 데이터 다 사라지나, 테이블은 그대로)  -> 다시 none으로
+      #[엔티티 수정시-2]create-drop 한 후 (안에 데이터 다 사라지나, 테이블은 그대로) -> 다시 none으로
 
     properties:
       hibernate:
@@ -40,32 +38,7 @@ spring:
 logging:
   level:
     org.hibernate.SQL: debug
-    org.hibernate.type: trace #로그에 물음표로 나오는 파라미터 확인하기
-
-
-
-#spring:
-#  h2: #기존에 적었던 코드네요. 참고로, devtools 라이브러리 설치시, 이 3줄은 안 적어도 됨
-#    console:
-#      enabled: true
-#
-#  # 여러줄 주석처리 : 전체 드래그후, ctrl /
-#  #  datasource:
-#  #    url: jdbc:h2:tcp://localhost/~/jpashop
-#  #    username: sa
-#  #    password:
-#  #    driver-class-name: org.h2.Driver
-#  #
-#  jpa:
-#    hibernate:
-#      ddl-auto: create
-#    properties:
-#      hibernate:
-#        format_sql: true
-#
-#
-#logging:
-#  level:
-#    org.hibernate.SQL: debug
-#    org.hibernate.type: trace
-
+    org.hibernate.type: trace
+    #로그에 물음표로 나오는 파라미터 확인하기
+    #gradle에 이 라이브러리 추가해서 작동 잘 되면, trace 필요 없음
+    #implementation("com.github.gavlyukovskiy:datasource-proxy-spring-boot-starter:1.6.3")//sql문의 ?를 로그로 보여줘

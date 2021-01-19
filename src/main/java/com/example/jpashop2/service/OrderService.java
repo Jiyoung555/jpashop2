@@ -17,9 +17,8 @@ public class OrderService {
     private final MemberRepository memberRepository;
     private final ItemRepository itemRepository;
     private final CartRepository cartRepository;
-    private final OrderRepositoryTest test;
 
-    //Order 주문하기
+    //Order 주문하기 (**item 여러개 주문하도록 내가 수정함)
     @Transactional
     public Long order(Long memberId, List<Long> itemIdArr, List<Integer> countArr) {
         Member member = memberRepository.findOne(memberId);
@@ -29,7 +28,7 @@ public class OrderService {
 //        //OrderItem 주문상품 "먼저" 생성(Order 주문을 위해, Item 상품 먼저 셋팅
 //        Item item = itemRepository.findOne(itemId);
 //        OrderItem orderItem = OrderItem.createOrderItem(item, item.getPrice(), count);
-//        orderItemArr.add(orderItem);
+//        orderItemArr.add(orderItem);//1개만..
 
         for(int i = 0; i <itemIdArr.size(); i++){
             Item item = itemRepository.findOne(itemIdArr.get(i));

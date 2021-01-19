@@ -37,7 +37,8 @@ public class OrderApiController {
         itemIdArr.add(itemId);
         countArr.add(count);
 
-        return orderService.order(memberId, itemIdArr, countArr);//**여러 item 선택할 경우로 수정함
+        //**여러 item 선택할 경우로 수정함
+        return orderService.order(memberId, itemIdArr, countArr);
     }
 
     @DeleteMapping("/api/order/{orderId}")
