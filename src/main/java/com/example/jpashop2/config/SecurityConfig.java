@@ -44,9 +44,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .headers().frameOptions().disable(); //Spring Security로 인한 X-Frame-Options 중지
 
         http.authorizeRequests()
-                .antMatchers("/member/**").authenticated() //로그인 필요
-                .antMatchers("/admin/**").authenticated() //로그인 필요
-                //.hasRole("ADMIN") //이넘값 아니라서 이렇게 안될 듯
+                .antMatchers("/member/**").authenticated() //(단순)로그인 필요. 비로그인시, login 페이지로 이동
+                .antMatchers("/admin/**").hasRole("ADMIN")
+                //여기엔 ADMIN이라고 썼지만, DB 저장된 값은 반드시 ROLE_ADMIN이어야 함
+                //스프링 시큐리티에서 권한 다룰 때, 자체적으로 PREFIX로 ROLE_을 추가함
                 .antMatchers("/**").permitAll(); //아무나 허용
 
         http.formLogin() //폼 로그인만 되나..?

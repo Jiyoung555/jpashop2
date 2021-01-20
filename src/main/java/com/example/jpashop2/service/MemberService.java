@@ -139,7 +139,7 @@ public class MemberService {
                 log.info("loginMember : " + member);
 
                 //어드민 계정이면, 세션 또 등록
-                if (member.getRole().equals("admin")) {
+                if (member.getRole().equals("ROLE_ADMIN")) {
                     httpSession.setAttribute("admin", member.getRole());
                 }
                 //return "loginSuccess";

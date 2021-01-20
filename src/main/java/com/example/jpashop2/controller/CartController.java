@@ -26,15 +26,19 @@ public class CartController {
 
     @GetMapping("/cart")
     public String cartList(Model model, HttpSession httpSession){
-        Object temp = httpSession.getAttribute("loginId");//로그인 Id
-        log.info("세션 없나? " + temp);
+        //Security 설정후 -> 로그인 세션은 loginEmail만 등록됨
+//        Object temp = httpSession.getAttribute("loginId");//로그인 Id
+//        log.info("세션 loginId : " + temp);
+//        Long memberId = Long.valueOf(String.valueOf(temp));//Object -> Long 타입변환
+//        log.info("memberId : " + memberId);
+//        Member loginMember = memberService.findOne(memberId);//로그인 Member
 
-//        Object temp2 = httpSession.getAttribute("loginEmail");//로그인 email
-//        log.info("세션 없나? " + temp2);
+        //**Security 등록으로 인해, 이렇게 수정함
+        Object temp2 = httpSession.getAttribute("loginEmail");//로그인 email
+        log.info("세션 loginEmail : " + temp2);
+        String loginEmail = (String) temp2;
+        Member loginMember = memberService.findByEmail(loginEmail);
 
-        Long memberId = Long.valueOf(String.valueOf(temp));//Object -> Long 타입변환
-        log.info("memberId : " + memberId);
-        Member loginMember = memberService.findOne(memberId);//로그인 Member
         List<Cart> myCarts = loginMember.getCarts();//회원 Cart 전부 가져오기
 
         List<MyCartsDTO> myCartDetail = new ArrayList<>(); //리스트 틀

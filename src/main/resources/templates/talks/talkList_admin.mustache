@@ -1,0 +1,60 @@
+{{>head}}
+
+<div class="talkList">
+
+    <!-- 상단부 -->
+
+
+    <div class="talk-label">
+        <h4>FAN Talk</h4>
+    </div>
+
+    <div class="talkList_btns">
+
+        <a href="/talkForm" class="btn goTalkFormBtn">
+            <i class="material-icons createIcon">create</i>
+            <span> 글쓰기 </span>
+        </a>
+
+        <button type="button" class="btn talkDeleteBtn" id="talk-check-delete">선택글 삭제</button>
+    </div>
+
+    <!-- 중간부 : 테이블-->
+    <div class="talk-mid">
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th class="th_1">번호</th>
+                <th class="th_2">날짜</th>
+                <th>제목</th>
+
+                <th class="th_4">어드민</th>
+                <th class="th_5">어드민</th>
+            </tr>
+
+            <tbody>
+            {{#talks}}
+                <tr>
+                    <td><a class="talk-table-link" href="/talk/{{id}}">{{id}}</a></td>
+                    <td><a class="talk-table-link" href="/talk/{{id}}">{{talkDate}}</a></td>
+                    <td><a class="talk-table-link" href="/talk/{{id}}">{{title}}</a></td>
+
+                    <input type="hidden" value="{{id}}" id="talk-id"><!--★어드민 삭제 버튼 클릭시, id값 히든으로 제출-->
+                    <td><button class="btn" id="talk-destroy-adminBtn">삭제하기</button></td>
+                    <td><input type="checkbox" class="talk-check-id" value="{{id}}"></td>
+                </tr>
+            {{/talks}}
+
+            {{^talks}}
+
+            {{/talks}}
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+
+<script src="/js/app/common/talk.js"></script>
+
+{{>footer}}

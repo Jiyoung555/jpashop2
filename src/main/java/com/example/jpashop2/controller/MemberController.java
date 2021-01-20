@@ -45,7 +45,7 @@ public class MemberController {
 
     //회원가입, 로그인 form 제출 -> api
 
-    //로그인 form 제출 -> js없이 테스트중..
+    //로그인 form 제출 -> js없이 테스트중.. -> 이거 안 거치고, security 자체로 인증하는 듯..
     @PostMapping("/loginAuth")
     public void loginAuth(MemberForm memberForm, HttpSession httpSession, Model model) {
         log.info("memberForm : " + memberForm);

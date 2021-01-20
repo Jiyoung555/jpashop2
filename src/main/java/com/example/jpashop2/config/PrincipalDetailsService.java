@@ -40,7 +40,7 @@ public class PrincipalDetailsService implements UserDetailsService {
 
 
         Member member = userRepository.findByEmail(username).orElse(null);
-        log.info("찾았니? " + member);
+        log.info("로그인 시도 중인 회원 : " + member);
 
         if(member == null) {
             throw new UsernameNotFoundException(username);

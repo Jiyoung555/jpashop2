@@ -50,9 +50,9 @@ public class MyLoginSuccessHandler implements AuthenticationSuccessHandler {
         Object principal = authentication.getPrincipal(); //PrincipalDetails 타입
         log.info("principal : " + principal);
 
-        Optional<Member> member = userRepository.findByEmail(email);
+        //Optional<Member> member = userRepository.findByEmail(email);
         //member 테이블의 orders, carts를 못 가져오네..
-        log.info("member 찾았니 : " + member);
+        //log.info("member 찾았니 : " + member);
 
         //session.setAttribute("loginId", member.getId());
         //session.setAttribute("loginMember", member);

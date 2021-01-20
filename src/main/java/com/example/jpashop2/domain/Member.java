@@ -6,7 +6,11 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-
+/*
+update member
+set role = 'ROLE_ADMIN'
+where member_id = 1;
+*/
 @Entity
 @Getter
 @Setter//보통 entity는 누가 함부로 못 바꾸게, 세터 안 만들지만
@@ -40,6 +44,10 @@ public class Member {
 
     @OneToMany(mappedBy = "member")
     private List<Cart> carts = new ArrayList<>();
+
+    //추가중..
+    @OneToMany(mappedBy = "member") //cascade는??
+    private List<Talk> talks = new ArrayList<>();
 
 
 
