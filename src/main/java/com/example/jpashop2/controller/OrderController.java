@@ -24,12 +24,20 @@ public class OrderController {
     private final OrderService orderService;
     private final MemberService memberService;
 
-    @GetMapping("/order")
+    @GetMapping("/member/order")
     public String orderList(Model model, HttpSession httpSession){
-        Object temp = httpSession.getAttribute("loginId");//로그인 Id
-        Long memberId = Long.valueOf(String.valueOf(temp));//Object -> Long 타입변환
-        log.info("memberId : " + memberId);
-        Member loginMember = memberService.findOne(memberId);//로그인 Member
+        //Object temp = httpSession.getAttribute("loginId");//로그인 Id
+        //Long memberId = Long.valueOf(String.valueOf(temp));//Object -> Long 타입변환
+        //log.info("memberId : " + memberId);
+        //Member loginMember = memberService.findOne(memberId);//로그인 Member
+        String loginEmail = (String) httpSession.getAttribute("loginEmail");
+        log.info("로그인 세션 이메일 : " + loginEmail);
+
+        if(loginEmail == null) {
+            return "login";
+        }
+
+        Member loginMember = memberService.findByEmail(loginEmail);
         List<Order> myOrders = loginMember.getOrders();//Order 전부 가져오기
         //Iterable<Order> myOrderList = orderService.findMyOrders(memberId); //안됨
 
@@ -56,7 +64,7 @@ public class OrderController {
         return "orders/orderList";
     }
 
-    @GetMapping("/orderShow/{orderId}")
+    @GetMapping("/member/orderShow/{orderId}")
     public String orderShow(@PathVariable Long orderId, Model model){
         Order order = orderService.findOne(orderId);
         Delivery delivery = order.getDelivery();

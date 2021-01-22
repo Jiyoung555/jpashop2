@@ -24,7 +24,7 @@ public class CartController {
     private final CartService cartService;
     private final MemberService memberService;
 
-    @GetMapping("/cart")
+    @GetMapping("/member/cart")
     public String cartList(Model model, HttpSession httpSession){
         //Security 설정후 -> 로그인 세션은 loginEmail만 등록됨
 //        Object temp = httpSession.getAttribute("loginId");//로그인 Id
@@ -34,13 +34,15 @@ public class CartController {
 //        Member loginMember = memberService.findOne(memberId);//로그인 Member
 
         //**Security 등록으로 인해, 이렇게 수정함
-        Object temp2 = httpSession.getAttribute("loginEmail");//로그인 email
-        log.info("세션 loginEmail : " + temp2);
-        String loginEmail = (String) temp2;
+        String loginEmail = (String) httpSession.getAttribute("loginEmail");//로그인 email
+        log.info("로그인 이메일 세션 : " + loginEmail);
+
+        if(loginEmail == null) {
+            return "login";
+        }
+
         Member loginMember = memberService.findByEmail(loginEmail);
-
         List<Cart> myCarts = loginMember.getCarts();//회원 Cart 전부 가져오기
-
         List<MyCartsDTO> myCartDetail = new ArrayList<>(); //리스트 틀
 
         if(myCarts.size() != 0) { //1. 카트에 물건 있으면
@@ -65,7 +67,7 @@ public class CartController {
     }
 
 
-    @GetMapping("/cartShow/{cartId}")
+    @GetMapping("/member/cartShow/{cartId}")
     public String cartShow(@PathVariable Long cartId, Model model){
         Cart cart = cartService.findOne(cartId);
         List<CartItem> cartItems = cart.getCartItems();

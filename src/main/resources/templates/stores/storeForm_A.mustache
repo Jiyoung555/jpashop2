@@ -25,45 +25,79 @@
 
     <!----------------------------------->
 
-    <!-- 카테고리 선택 -->
-    <div class="form-group">
-        <label>분류</label>
-        <select name = "sort" size = "1">
-            <option value = "book"> Book
-            <option value = "album"> Album
-            <option value = "movie"> Movie
-        </select>
+
+    <div>
+        <label>분류</label> <!--밑 div에 넣으면 줄바꿈 안 됨 -_- -->
+    </div>
+
+    <!--버튼 누르면-->
+    <div class="form-group btn-group btn-group-toggle" data-toggle="buttons">
+        <label class="btn btn-secondary active">
+            <input type="radio" name="options" id="option1" checked
+                   data-toggle="collapse" data-target=".multi-collapse-book"> Book
+            <!--radio로 해야, 버튼모양으로 변함-->
+        </label>
+
+        <label class="btn btn-secondary">
+            <input type="radio" name="options" id="option2"
+                   data-toggle="collapse" data-target=".multi-collapse-album"> Album
+        </label>
+
+        <label class="btn btn-secondary">
+            <input type="radio" name="options" id="option3"
+                   data-toggle="collapse" data-target=".multi-collapse-movie"> Movie
+        </label>
+    </div>
+
+    <p></p>
+
+    <input type="hidden" name="sort" id="sort" value=""> <!--jQuery-->
+
+    <!--싸악 열림림-->
+    <div class="collapse multi-collapse-book">
+        <div class="form-group">
+            <label>Book 작가</label>
+            <input type="text" class="form-control" id="item-author" name="author">
+        </div>
+
+        <div class="form-group">
+            <label>Book 타입</label>
+            <input type="text" class="form-control" id="item-type" name="type">
+        </div>
+    </div>
+
+    <div class="collapse multi-collapse-album">
+        <div class="form-group">
+            <label>Album 아티스트</label>
+            <input type="text" class="form-control" id="item-artist" name="artist">
+        </div>
+
+        <div class="form-group">
+            <label>Album 장르</label>
+            <input type="text" class="form-control" id="item-genre" name="genre">
+        </div>
+    </div>
+
+    <div class="collapse multi-collapse-movie">
+        <div class="form-group">
+            <label>Movie 감독</label>
+            <input type="text" class="form-control" id="item-director" name="director">
+        </div>
+
+        <div class="form-group">
+            <label>Movie 배우</label>
+            <input type="text" class="form-control" id="item-actor" name="actor">
+        </div>
     </div>
 
 
-    <div class="form-group">
-        <label>Book 작가</label>
-        <input type="text" class="form-control" id="item-author" name="author">
-    </div>
-
-    <div class="form-group">
-        <label>Book 타입</label>
-        <input type="text" class="form-control" id="item-type" name="type">
-    </div>
-
 <!--    <div class="form-group">-->
-<!--        <label>Album 아티스트</label>-->
-<!--        <input type="text" class="form-control" id="item-artist" name="artist">-->
-<!--    </div>-->
-
-<!--    <div class="form-group">-->
-<!--        <label>Album 장르</label>-->
-<!--        <input type="text" class="form-control" id="item-genre" name="genre">-->
-<!--    </div>-->
-
-<!--    <div class="form-group">-->
-<!--        <label>Movie 감독</label>-->
-<!--        <input type="text" class="form-control" id="item-director" name="director">-->
-<!--    </div>-->
-
-<!--    <div class="form-group">-->
-<!--        <label>Movie 배우</label>-->
-<!--        <input type="text" class="form-control" id="item-actor" name="actor">-->
+<!--        <label>분류</label>-->
+<!--        <select name = "sort" size = "1">-->
+<!--            <option value = "book"> Book-->
+<!--            <option value = "album"> Album-->
+<!--            <option value = "movie"> Movie-->
+<!--        </select>-->
 <!--    </div>-->
 
 
@@ -74,12 +108,12 @@
         <a href="#" class="btn" id="delete_file_btn">파일 삭제</a>
     </div>
 
-    <button type="submit" class="btn btn-primary" id="item-create-btn">등록</button>
+    <button type="submit" class="btn btn-secondary" id="item-create-btn">등록</button>
     <!--type submit / js 안 씀-->
 </form>
 
 
 
-<!--<script src="/js/app/admin/store.js"></script>-->
+<script src="/js/app/common/itemSort.js"></script>
 
 {{>footer}}

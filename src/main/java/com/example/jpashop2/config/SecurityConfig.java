@@ -53,7 +53,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.formLogin() //폼 로그인만 되나..?
                 .loginPage("/login")
                 .loginProcessingUrl("/loginAuth") // 로그인이 실제 이루어지는 곳...
-                .usernameParameter("email")
+                .usernameParameter("email") //**
                 //.passwordParameter("")
                 .successHandler(new MyLoginSuccessHandler(userRepository)) //파라미터 넣어 테스트..
                 //.defaultSuccessUrl("/cart") //로그인 성공시 이동할 페이지 (임시로 카트페이지)

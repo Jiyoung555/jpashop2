@@ -27,7 +27,8 @@ public class OrderForm {
     String itemName;
     int orderPrice;
     int count;
-    Long memberId;
+    //Long memberId;
+    //String memberEmail;//시큐리티
 
     //1. cartList에서 체크한 거
     ArrayList<Long> cartIdArr;
@@ -35,10 +36,11 @@ public class OrderForm {
     //2. store에서 체크한 거
     ArrayList<Long> itemIdArr;
 
-    public Member toMember() {
-        Member member = memberService.findOne(memberId);
-        return member;
-    }
+//    public Member toMember() {
+//        //Member member = memberService.findOne(memberId);
+//        Member member = memberService.findByEmail(memberEmail);
+//        return member;
+//    }
 
     public OrderItem toOrderItem(){
         Item item = itemService.findOne(itemId);

@@ -24,12 +24,14 @@ public class CartForm {
     String itemName;
     int cartPrice;
     int cartCount;
-    Long memberId;
+    //Long memberId;
+    //String memberEmail;
 
-    public Member toMember() {
-        Member member = memberService.findOne(memberId);
-        return member;
-    }
+//    public Member toMember() {
+//        //Member member = memberService.findOne(memberId);
+//        Member member = memberService.findByEmail(memberEmail);
+//        return member;
+//    }
 
     public CartItem toCartItem(){
         Item item = itemService.findOne(itemId);

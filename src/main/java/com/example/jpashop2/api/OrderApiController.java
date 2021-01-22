@@ -24,13 +24,26 @@ public class OrderApiController {
     private final MemberService memberService;
 
     @PostMapping("/api/order")
-    public Long insertOrder(@RequestBody OrderForm form){
+    public String insertOrder(@RequestBody OrderForm form, HttpSession httpSession){
+
+        String memberEmail = (String) httpSession.getAttribute("loginEmail");
+        log.info("로그인 이메일 세션 : " + memberEmail);
+
+        if(memberEmail == null) { //null값은 ==로. equals로 하면 에러
+            //return "redirect:/login";
+            return "LOGIN";
+        }
+
         log.info("form : " + form.toString());
 
         List<Long> itemIdArr = new ArrayList<>();//**
         List<Integer> countArr = new ArrayList<>();//**
 
-        Long memberId = form.getMemberId();
+        //Long memberId = form.getMemberId();
+        //String memberEmail = form.getMemberEmail();
+
+        Member member = memberService.findByEmail(memberEmail);
+        Long memberId = member.getId();
         Long itemId = form.getItemId();
         int count = form.getCount();
 
@@ -38,7 +51,9 @@ public class OrderApiController {
         countArr.add(count);
 
         //**여러 item 선택할 경우로 수정함
-        return orderService.order(memberId, itemIdArr, countArr);
+        Long result = orderService.order(memberId, itemIdArr, countArr);
+        log.info("결과값 : " + result); //order_id값 리턴함
+        return "SUCCESS";
     }
 
     @DeleteMapping("/api/order/{orderId}")
@@ -50,21 +65,33 @@ public class OrderApiController {
 
     //store에서 체크박스 구매 (개수는 아이템당 1개)
     @PostMapping("/api/checkedStoreToOrder")
-    public Long checkedStoreToOrder(@RequestBody OrderForm form, HttpSession httpSession){
+    public String checkedStoreToOrder(@RequestBody OrderForm form, HttpSession httpSession){
         log.info("form : " + form);
         List<Long> itemIdArr = form.getItemIdArr();//store 여러개 -> order
 
-        Object temp = httpSession.getAttribute("loginId");//로그인 Id
-        Long memberId = Long.valueOf(String.valueOf(temp));//Object -> Long 타입변환
-        log.info("memberId : " + memberId);
-        Member loginMember = memberService.findOne(memberId);//로그인 Member
+        String loginEmail = (String) httpSession.getAttribute("loginEmail");
+        log.info("로그인 세션 이메일 : " + loginEmail);
+
+        if(loginEmail == null) {
+            return "LOGIN";
+        }
+
+        Member loginMember = memberService.findByEmail(loginEmail);
+        Long memberId = loginMember.getId();
+
+        //시큐리티 수정
+        //Object temp = httpSession.getAttribute("loginId");//로그인 Id
+        //Long memberId = Long.valueOf(String.valueOf(temp));//Object -> Long 타입변환
+        //log.info("memberId : " + memberId);
+        //Member loginMember = memberService.findOne(memberId);//로그인 Member
 
         List<Integer> countArr = new ArrayList<>();
         for (int i = 0; i < itemIdArr.size(); i++) {
             countArr.add(1);
         }
 
-        return orderService.order(memberId, itemIdArr, countArr);
+        orderService.order(memberId, itemIdArr, countArr);
+        return "SUCCESS";
 
     }
 

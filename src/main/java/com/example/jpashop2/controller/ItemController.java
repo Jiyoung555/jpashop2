@@ -1,13 +1,12 @@
 package com.example.jpashop2.controller;
-import com.example.jpashop2.domain.Book;
-import com.example.jpashop2.domain.Category;
-import com.example.jpashop2.domain.Item;
+import com.example.jpashop2.domain.*;
 import com.example.jpashop2.dto.ItemForm;
 import com.example.jpashop2.service.CategoryService;
 import com.example.jpashop2.service.ItemService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,7 +24,7 @@ public class ItemController {
     private final CategoryService categoryService;
 
     //storeForm 페이지
-    @GetMapping("/storeForm")
+    @GetMapping("/admin/storeForm")
     public String storeForm(){
         return "stores/storeForm_A";
     }
@@ -35,15 +34,36 @@ public class ItemController {
     public String createItem(@RequestParam("image") MultipartFile files,
                              ItemForm form) throws IOException {
 
-        if (!files.isEmpty()) { //file 제출시
-            //1.C드라이브 안에 JPASHOP2_ITEM_IMG 폴더 직접 먼저 생성하세요
-            //2.DB에 ITEM 테이블 먼저 생성하세요
-            //3.config / FileUploadConfig 클래스에 가상url 주소 설정 잊지마세요
-            String uploadPath2 = "C:\\JPASHOP2_ITEM_IMG"; //절대경로
+        String name = form.getName();
+        int price = form.getPrice();
+        int stockQuantity = form.getStockQuantity();
+        String sort = form.getSort();//카테고리
+        String author = form.getAuthor(); //Book
+        String type = form.getType();
+        String artist = form.getArtist(); //Album
+        String genre = form.getGenre();
+        String director = form.getDirector(); //movie
+        String actor = form.getActor();
 
-            String itemSort = form.getSort();
+        if(name.equals("") || price == 0 || stockQuantity == 0 || sort.equals("")){//빈칸 검증
+            throw new IOException();
+        }
+
+        if (!files.isEmpty()) { //file 제출시
+        //1.C드라이브 안에 JPASHOP2_ITEM_IMG 폴더 직접 먼저 생성하세요
+        //2.DB에 ITEM 테이블 먼저 생성하세요
+        //3.config / FileUploadConfig 클래스에 가상url 주소 설정 잊지마세요
+        String uploadPath2 = "C:\\JPASHOP2_ITEM_IMG"; //절대경로
+
+        String itemSort = form.getSort();
+        log.info("itemSort : " + itemSort);
+
+            //----------------------------------------------
 
             if (itemSort.equals("book")) {
+                if(author.equals("") || type.equals("")){//빈칸 검증
+                    throw new IOException();
+                }
                 Category category = new Category();
                 category.setName(itemSort);
                 Long categoryId = categoryService.saveCategory(category);
@@ -58,28 +78,61 @@ public class ItemController {
                 Long itemId = itemService.saveItem(book);
                 //item 넣고, category_item 자동으로 넣을 때, category_item_id가 null이라는 에러 남
                 //db에서 category_item 테이블 그냥 지우고, id값을 자동으로 생성하는 테이블 재생성하니 성공!!
-//                CREATE TABLE CATEGORY_ITEM(
-//                        CATEGORY_ITEM_ID INT(100) NOT NULL AUTO_INCREMENT PRIMARY KEY,
-//                        ITEM_ID INT(100) NOT NULL,
-//                        CATEGORY_ID INT(100) NOT NULL
-//                );
+    //                CREATE TABLE CATEGORY_ITEM(
+    //                        CATEGORY_ITEM_ID INT(100) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    //                        ITEM_ID INT(100) NOT NULL,
+    //                        CATEGORY_ID INT(100) NOT NULL
+    //                );
 
                 return "redirect:/store/" + itemId; //상세보기
 
-
+            //-----------------------------------------------
 
             } else if (itemSort.equals("album")) {
-                //TO DO
+                if(artist.equals("") || genre.equals("")){
+                    throw new IOException();
+                }
+                Category category = new Category();
+                category.setName(itemSort);
+                Long categoryId = categoryService.saveCategory(category);
+
+                Album album = form.toAlbum(); //form(DTO) → Entity
+                album.uploadImage(files, uploadPath2); //Entity 메소드 호출 → 절대경로에 file 넣기
+
+                album.addCategory(category);//양방향
+                category.addItem(album);
+
+                Long itemId = itemService.saveItem(album);
+                return "redirect:/store/" + itemId; //상세보기
+
+                //----------------------------------------------
+
             } else if (itemSort.equals("movie")) {
+                if(director.equals("") || actor.equals("")){
+                    throw new IOException();
+                }
+                Category category = new Category();
+                category.setName(itemSort);
+                Long categoryId = categoryService.saveCategory(category);
+
+                Movie movie = form.toMovie(); //form(DTO) → Entity
+                movie.uploadImage(files, uploadPath2); //Entity 메소드 호출 → 절대경로에 file 넣기
+
+                movie.addCategory(category);//양방향
+                category.addItem(movie);
+
+                Long itemId = itemService.saveItem(movie);
+                return "redirect:/store/" + itemId; //상세보기
             }
 
+            //-------------------------------------------
 
         } else { //file 미제출시
             //form만 db 저장 //imageName은 null값 저장
             //TO DO
         }
 
-        return "/storeForm";
+        return "/admin/storeForm";
     }
 
 

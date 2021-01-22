@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,17 +20,32 @@ public class CartApiController {
     private final CartService cartService;
     private final MemberService memberService;
 
+    //시큐리티로 인해 로그인 이메일 제출
     //카트 담기 (**내가) //storeShow에서 카트 담기 - 1개의 아이템
     @PostMapping("/api/cart")
-    public String insertCart(@RequestBody CartForm form){
-        log.info("form : " + form.toString());
+    public String insertCart(@RequestBody CartForm form, HttpSession httpSession){
 
-        Long memberId = form.getMemberId();
+
+
+        //Long memberId = form.getMemberId();
+        //String memberEmail = form.getMemberEmail();//시큐리티로 인해 로그인 이메일 제출
+        String memberEmail = (String) httpSession.getAttribute("loginEmail");
+        log.info("로그인 이메일 세션 : " + memberEmail);
+
+        if(memberEmail == null) {
+            //return "redirect:/login";
+            return "LOGIN";
+        }
+
+
+        log.info("form : " + form.toString());
         Long itemId = form.getItemId();
         int cartCount = form.getCartCount();
 
-        Member loginMember = memberService.findOne(memberId);//로그인 Member
+        //Member loginMember = memberService.findOne(memberId);//로그인 Member
+        Member loginMember = memberService.findByEmail(memberEmail);
         List<Cart> myCarts = loginMember.getCarts();//회원의 기존 카트 모두 가져오기
+        Long memberId = loginMember.getId();
 
 
         if(myCarts.size() != 0){//[1]기존 카트에 물건 있으면
@@ -61,7 +77,7 @@ public class CartApiController {
                             return "FAILED";
 
                         }
-                //DB에서 확인해보세요
+                        //DB에서 확인해보세요
                 /*
                 SELECT *
                         FROM CART_ITEM AS CI
@@ -88,6 +104,8 @@ public class CartApiController {
 
         return "FAILED";
         //return cartService.cart(memberId, itemId, cartCount);
+
+
     }
 
     @DeleteMapping("/api/cart/{cartId}")

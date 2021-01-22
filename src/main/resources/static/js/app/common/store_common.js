@@ -22,7 +22,8 @@ var store = {
         var data = {
           itemId: document.querySelector('#item_id').value,
           cartCount: document.querySelector('#count').value,
-          memberId: document.querySelector('#memberId').value,
+          //memberId: document.querySelector('#memberId').value,
+          //memberEmail: document.querySelector('#memberEmail').value
         };
 
         fetch('/api/cart', {
@@ -50,18 +51,16 @@ var store = {
                       alert('카트 담기 실패. 다시 시도해 주세요.');
                       window.location.reload=true;
                     }
+
+                    if(aaa == 'LOGIN') {
+                      alert('로그인 먼저 해주세요.');
+                      window.location.href='/login';
+                    }
                 })
 
             } else {
               alert('에러 발생. 다시 시도해 주세요.');
             }
-
-//          if (response.ok) {
-//            alert('장바구니 담기 성공');
-//            window.location.reload=true;
-//          } else {
-//            alert('장바구니 담기 실패');
-//          }
 
         });
     },
@@ -70,10 +69,7 @@ var store = {
     order: function() {
         var data = { //form 데이터를 JSON으로 만듬
           itemId: document.querySelector('#item_id').value,
-//          itemName: document.querySelector('#item_name').value,
-//          orderPrice: document.querySelector('#price').value,
           count: document.querySelector('#count').value,
-          memberId: document.querySelector('#memberId').value,
         };
 
         fetch('/api/order', {
@@ -83,13 +79,34 @@ var store = {
             'Content-Type': 'application/json'
           }
         }).then(function(response) {
-          if (response.ok) {
-            alert('주문 성공');
-            window.location.href='/order';
-            //window.location.reload=true;
-          } else {
-            alert('주문 실패');
-          }
+
+//          if (response.ok) {
+//            alert('주문 성공');
+//            window.location.href='/order';
+//          } else {
+//            alert('주문 실패');
+//          }
+
+            if (response.ok) {
+                response.text().then(function(aaa){
+                    console.log(aaa);
+
+                    if(aaa == 'SUCCESS') {
+                      alert('주문 성공.');
+                      window.location.href='/order';
+                    }
+
+                    if(aaa == 'LOGIN') {
+                      alert('로그인 먼저 해주세요.');
+                      window.location.href='/login';
+                    }
+
+                })
+
+            } else {
+              alert('에러 발생. 다시 시도해 주세요.');
+            }
+
         });
     },
 
@@ -121,12 +138,33 @@ var store = {
               }
             }).then(function(response) {
 
-              if (response.ok) {
-                alert('주문 성공');
-                window.location.href='/order';
-              } else {
-                alert('주문 실패');
-              }
+//              if (response.ok) {
+//                alert('주문 성공');
+//                window.location.href='/order';
+//              } else {
+//                alert('주문 실패');
+//              }
+
+            if (response.ok) {
+                response.text().then(function(aaa){
+                    console.log(aaa);
+
+                    if(aaa == 'SUCCESS') {
+                      alert('주문 성공.');
+                      window.location.href='/order';
+                    }
+
+                    if(aaa == 'LOGIN') {
+                      alert('로그인 먼저 해주세요.');
+                      window.location.href='/login';
+                    }
+
+                })
+
+            } else {
+              alert('에러 발생. 다시 시도해 주세요.');
+            }
+
 
             });
         }//if~else

@@ -3,7 +3,6 @@ import lombok.Getter;
 import lombok.Setter;
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.List;
 
 //DB에서 TALK에 + MEMBER 붙여 보기
 //
@@ -12,6 +11,15 @@ import java.util.List;
 //JOIN MEMBER AS M
 //ON T.member_id = M.member_id;
 
+/*
+Member(1)    -  (N)Talk
+상위(cascade)    주인 FK
+               양방향 메소드
+               createTalk 메소드
+
+               TO DO: 추후 댓글 붙일 예정..
+
+*/
 @Entity @Getter @Setter
 public class Talk {
     @Id
