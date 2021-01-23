@@ -1,0 +1,27 @@
+<button id="test_btn">클릭</button>
+
+<script>
+var test = {
+    init: function() {
+        var _this = this;
+        const testBtn = document.querySelector('#test_btn');
+        if (testBtn != null) {
+          testBtn.addEventListener('click', _this.create);
+        }
+    },
+
+    create: function() {
+        var msg = '안녕';
+        msg += '하세요.';
+        msg += '\n반갑습니다';
+
+        alert(msg);
+        window.location.href='/login'; //alert창 확인 후 이동할 url 설정
+    }
+
+};
+
+// 객체 초기화
+test.init();
+
+</script>

@@ -4,14 +4,18 @@ import com.example.jpashop2.domain.*;
 import com.example.jpashop2.dto.CartForm;
 import com.example.jpashop2.dto.OrderForm;
 import com.example.jpashop2.dto.OrderSearch;
+import com.example.jpashop2.dto.PaymentDTO;
+import com.example.jpashop2.repository.PaymentRepository;
 import com.example.jpashop2.service.CartService;
 import com.example.jpashop2.service.MemberService;
 import com.example.jpashop2.service.OrderService;
+import com.example.jpashop2.service.PaymentService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,6 +26,21 @@ public class OrderApiController {
     private final OrderService orderService;
     private final CartService cartService;
     private final MemberService memberService;
+    private final PaymentService paymentService;
+
+    @PostMapping("/payment/price")
+    public String paymentPrice(@RequestBody PaymentDTO paymentDTO, HttpSession session){
+        int amount = paymentDTO.getAmount();
+        log.info("결제 금액 : " + amount);
+        //String email = (String) session.getAttribute("loginEmail");//추후 Member랑 조인시키기..
+        //Member member = memberService.findByEmail(email);
+        Payment payment = paymentDTO.toPayment();
+        payment.setPaymentDate(LocalDateTime.now());
+
+        Long savedId = paymentService.create(payment);
+        return "redirect:/store";
+    }
+
 
     @PostMapping("/api/order")
     public String insertOrder(@RequestBody OrderForm form, HttpSession httpSession){

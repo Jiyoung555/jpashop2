@@ -37,11 +37,11 @@ public class MemberController {
         return "login";
     }
 
-    @GetMapping("/logout")
-    public String logout(HttpSession httpSession){
-        httpSession.invalidate(); //세션 삭제
-        return "redirect:/sone"; //view 필요 없음
-    }
+//    @GetMapping("/logout") //시큐리티로 수정
+//    public String logout(HttpSession httpSession){
+//        httpSession.invalidate(); //세션 삭제
+//        return "redirect:/sone"; //view 필요 없음
+//    }
 
     //회원가입, 로그인 form 제출 -> api
 

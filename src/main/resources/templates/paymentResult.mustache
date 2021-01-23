@@ -1,0 +1,22 @@
+<script>
+var Iamport = require('iamport');
+
+var iamport = new Iamport({
+  impKey: '3187329072162776', //나의 REST API 키
+  impSecret: 'g3IgrpXKzNwY5u2OHapUT9zTMVFsrmXIqFZS4XCEL9CQDEElP4fIdPB0KhscEpU45TX9RANCJqsn57IU' //REST API secret
+});
+
+app.get('/payments/status/all',(req,res)=>{
+        iamport.payment.getByStatus({
+          payment_status: 'paid'
+
+        }).then(function(result){
+            res.render('payments_list',{list:result.list});
+
+        }).catch(function(error){
+            console.log(error);
+            red.send(error);
+        })
+});
+
+</script>

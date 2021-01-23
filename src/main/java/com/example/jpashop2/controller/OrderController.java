@@ -24,6 +24,24 @@ public class OrderController {
     private final OrderService orderService;
     private final MemberService memberService;
 
+    @GetMapping("/test")
+    public String test(){
+        return "test";
+    }
+
+    @GetMapping("/payment")
+    public String payment(){
+        return "payment";
+    }
+
+    @GetMapping("/payments/status/all")
+    public String paymentResult(){
+        return "paymentResult";
+    }
+
+
+
+
     @GetMapping("/member/order")
     public String orderList(Model model, HttpSession httpSession){
         //Object temp = httpSession.getAttribute("loginId");//로그인 Id
