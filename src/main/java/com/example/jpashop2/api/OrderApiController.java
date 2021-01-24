@@ -28,15 +28,15 @@ public class OrderApiController {
     private final MemberService memberService;
     private final PaymentService paymentService;
 
-    @PostMapping("/payment/price")
+    @PostMapping("/payment/price") //RequestBody는 POST 방식일 때만 값 받아올 수 있음
     public String paymentPrice(@RequestBody PaymentDTO paymentDTO, HttpSession session){
         int amount = paymentDTO.getAmount();
+        log.info("로그찍기");
         log.info("결제 금액 : " + amount);
         //String email = (String) session.getAttribute("loginEmail");//추후 Member랑 조인시키기..
         //Member member = memberService.findByEmail(email);
         Payment payment = paymentDTO.toPayment();
         payment.setPaymentDate(LocalDateTime.now());
-
         Long savedId = paymentService.create(payment);
         return "redirect:/store";
     }

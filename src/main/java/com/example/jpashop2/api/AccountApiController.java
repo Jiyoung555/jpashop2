@@ -28,6 +28,7 @@ public class AccountApiController {
     private final MemberService memberService;
 
     //아이디 중복체크 //ajax 통신이니, ApiController로 와야함 (@RestController)
+    //GET 방식은 ajax로 받을 때, RequestBody가 없음. 걍 파라미터로 받기
     @GetMapping("/idCheck")
     public String id_check(String email) {
         List<Member> memberList = memberRepository.findByEmail(email);

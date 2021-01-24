@@ -34,6 +34,7 @@ public class MyLoginSuccessHandler implements AuthenticationSuccessHandler {
     @Autowired
     MemberService memberService;
 
+    @Transactional
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request,
                                         HttpServletResponse response,
@@ -51,9 +52,8 @@ public class MyLoginSuccessHandler implements AuthenticationSuccessHandler {
         log.info("principal : " + principal);
 
         //Optional<Member> member = userRepository.findByEmail(email);
-        //member 테이블의 orders, carts를 못 가져오네..
+        //member 테이블의 orders, carts를 못 가져오네.. (아마 lazy로 적어놔서 그런 듯..)
         //log.info("member 찾았니 : " + member);
-
         //session.setAttribute("loginId", member.getId());
         //session.setAttribute("loginMember", member);
 

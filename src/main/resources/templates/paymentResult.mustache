@@ -1,4 +1,32 @@
+{{>head}}
+
+<div>
+    <table>
+        <thead>
+        <tr>
+            <th>주문번호</th>
+            <th>주문날짜</th>
+            <th>주문자</th>
+            <th>주문가격</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+
 <script>
+
+IMP.init('imp06376564');//나의 가맹점 식별코드
+
 var Iamport = require('iamport');
 
 var iamport = new Iamport({
@@ -20,3 +48,5 @@ app.get('/payments/status/all',(req,res)=>{
 });
 
 </script>
+
+{{>footer}}
