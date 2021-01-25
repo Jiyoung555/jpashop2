@@ -24,8 +24,9 @@ public class OrderItem {
     @JoinColumn(name = "order_id")  //order 클래스를 붙인다. order 클래스의 PK를 통해 //그 PK가 여기서는 FK가 되고, 그 FK명을 지금 정해줌
     private Order order;
 
-    private int orderPrice; //주문 가격
-    private int count; //주문 수량
+    private int orderPrice; //가격
+    private int count; //수량
+    private int totalPrice; //가격 x 수량
 
     //**주문 상품 - 생성 & 초기 셋팅
     public static OrderItem createOrderItem(Item item, int orderPrice, int count) {
@@ -34,6 +35,7 @@ public class OrderItem {
         orderItem.setItem(item);//객체 초기 셋팅
         orderItem.setOrderPrice(orderPrice);
         orderItem.setCount(count);
+        orderItem.setTotalPrice(orderPrice * count);
 
         item.removeStock(count);//주문 상품 생성했으니 -> Item 재고 수량 빼기
 

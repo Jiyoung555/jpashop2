@@ -29,25 +29,13 @@ public class OrderController {
         return "test";
     }
 
-    @GetMapping("/payment")
+    @GetMapping("/payment") //테스트
     public String payment(){
         return "payment";
     }
 
-    @GetMapping("/payments/status/all")
-    public String paymentResult(){
-        return "paymentResult";
-    }
-
-
-
-
     @GetMapping("/member/order")
     public String orderList(Model model, HttpSession httpSession){
-        //Object temp = httpSession.getAttribute("loginId");//로그인 Id
-        //Long memberId = Long.valueOf(String.valueOf(temp));//Object -> Long 타입변환
-        //log.info("memberId : " + memberId);
-        //Member loginMember = memberService.findOne(memberId);//로그인 Member
         String loginEmail = (String) httpSession.getAttribute("loginEmail");
         log.info("로그인 세션 이메일 : " + loginEmail);
 
@@ -208,5 +196,46 @@ public class OrderController {
         return "orders/adminOrderSearch";
     }
 
+
+    //검색 결과 보여줌
+    @PostMapping("/admin/orderSearchTop")
+    public String orderSearchTest(OrderSearch orderSearch, Model model){
+        log.info("주문상태 : " + orderSearch.getOrderStatus());
+        log.info("회원 이름 : " + orderSearch.getMemberName());
+        log.info("회원 이메일 : " + orderSearch.getMemberEmail());
+
+        List<Order> orders = orderService.findOrdersBySearchTop(orderSearch);
+
+        List<MyOrdersDTO> searchOrderDetail = new ArrayList<>();//리스트 틀
+        for(int i = 0; i < orders.size(); i++){
+            Order order = orders.get(i);
+
+            //어드민용
+            Long memberId = order.getMember().getId();
+            String email = order.getMember().getEmail();
+            String member_name = order.getMember().getName();
+            Member member = new Member();
+            member.setId(memberId);
+            member.setEmail(email);
+            member.setName(member_name);
+
+            Delivery delivery = order.getDelivery();
+            List<OrderItem> orderItems = order.getOrderItems();
+
+            String math = "";
+            for(int k = 0; k < orderItems.size(); k++) {
+                int orderPrice = orderItems.get(k).getOrderPrice();
+                int count = orderItems.get(k).getCount();
+                System.out.println("가격 : " + orderPrice);
+                math += "(" + orderPrice + "원x" + count +"개)" ;
+            }
+            System.out.println("math : " + math);
+            MyOrdersDTO everyOrder = new MyOrdersDTO(order, member, delivery, orderItems, math);
+            searchOrderDetail.add(everyOrder);
+        }
+
+        model.addAttribute("searchOrderDetail", searchOrderDetail);
+        return "orders/adminOrderSearch";
+    }
 
 }

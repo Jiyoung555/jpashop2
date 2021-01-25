@@ -62,6 +62,18 @@ public class Order {
 
     //==========================
 
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "payment_id")
+    private Payment payment;
+
+    public void setPayment(Payment payment) { //양방향
+        this.payment = payment;
+        payment.setOrder(this);
+    }
+
+    //==========================
+
+
     //주문한 시각
     private LocalDateTime orderDate;
 
@@ -72,28 +84,50 @@ public class Order {
 
     //==================
 
-    //**생성 메소드
+    //**생성 메소드 (결제x)
     public static Order createOrder(
             Member member,
             Delivery delivery,
-            List<OrderItem> orderItems) { // ... = [] 배열 //OrderItem... orderItems에서 내가 바꿈**
-        // 주문 객체 만들고, 초기 셋팅
+            List<OrderItem> orderItems) {
+        // ... = [] 배열 //OrderItem... orderItems에서 내가 바꿈**
+
         Order order = new Order(); //주문 객체 만들고
 
         order.setMember(member);//회원
         order.setDelivery(delivery);//배송
 
+        for (OrderItem orderItem : orderItems) {
+            order.addOrderItem(orderItem);//주문 상품들
+        }
+
+        order.setStatus(OrderStatus.ORDERED);//주문 상태(**IN_CART에서 내가 바꿈) //나중에 PAID로 고치기**
+        order.setOrderDate(LocalDateTime.now());//주문 생성시간
+
+        //order.setPayment(payment);
+        return order;
+    }
+
+    public static Order createOrderPayment(//결제 o
+            Member member,
+            Delivery delivery,
+            List<OrderItem> orderItems, // ... = [] 배열 //OrderItem... orderItems에서 내가 바꿈**
+            Payment payment) {
+
+        Order order = new Order(); //주문 객체 만들고
+
+        order.setMember(member);//회원
+        order.setDelivery(delivery);//배송
 
         for (OrderItem orderItem : orderItems) {
             order.addOrderItem(orderItem);//주문 상품들
         }
 
-        order.setStatus(OrderStatus.ORDERED);//주문 상태(**IN_CART에서 내가 바꿈)
+        order.setStatus(OrderStatus.ORDERED);//주문 상태(**IN_CART에서 내가 바꿈) //나중에 PAID로 고치기**
         order.setOrderDate(LocalDateTime.now());//주문 생성시간
 
+        order.setPayment(payment); //**
         return order;
     }
-
 
 
     //**주문 취소 메소드

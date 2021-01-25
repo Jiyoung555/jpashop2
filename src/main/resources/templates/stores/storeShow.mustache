@@ -1,19 +1,37 @@
 {{>head}}
 
+<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+<!--아임포트 라이브러리 추가--> <!--jquery script는 head에 있어서 생략-->
+
+<script>
+$(document).ready(function(){ //html 문서 다 읽어들임 (안 쓰면 안 됨)
+
+    $("#count").on("change",function(){ //수량 select시, 총 가격 텍스트 변경
+        if(this.value != "") {
+            var price = $('#price').text();
+            var count = $("#count option:selected").val();
+            var totalPrice = price * count;
+
+            $('#totalPrice').text('총 금액 : ' + totalPrice + "원");
+        }
+    });
+
+});
+</script>
+
 {{#item}}
 <div class="container-fruid storeShow">
     <div class="row storeShow_upper">
-        <div class="col-9">
-            <img src="/uploads2/{{imagename}}" alt="">
+        <div class="col-8">
+            <img id="item_image" src="/uploads2/{{imagename}}" alt="">
         </div>
 
-        <div class="col-3">
+        <div class="col-4">
             <form>
                 <p id="item_name">{{name}}</p>
                 <p id="price">{{price}}</p>
 
                 <hr>
-
 
                 수량
                 <select id="count" name = "count" size = "1">
@@ -24,12 +42,23 @@
 
                 <hr>
 
-                <p>총 금액 </p>
+                <p id="totalPrice">총 금액 :</p>
 
                 <input id="item_id" type="hidden" value="{{id}}">
 
-                <button type="button" id="store_cart_btn">장바구니</button>
-                <button type="button" id="store_order_btn">구매하기</button>
+                {{#member}}
+                    <input id="member_email" type="hidden" value="{{member.email}}">
+                    <input id="member_name" type="hidden" value="{{member.name}}">
+                {{/member}}
+
+                {{^member}}
+                    <input id="member_email" type="hidden" value="">
+                {{/member}}
+
+
+                <button type="button" class="btn btn-secondary" id="store_cart_btn">장바구니</button>
+                <button type="button" class="btn btn-secondary" id="store_order_btn">주문하기</button>
+                <button type="button" class="btn btn-danger" id="store_payment_btn">결제하기</button>
             </form>
         </div>
 
@@ -42,7 +71,8 @@
 </div><!--end container-->
 {{/item}}
 
-<!--장바구니, 구매하기-->
-<script src = "/js/app/common/store_common.js"></script>
+
+<script src = "/js/app/common/payment.js"></script> <!--아임포트 결제하기-->
+<script src = "/js/app/common/store_common.js"></script> <!--장바구니, 주문하기-->
 
 {{>footer}}

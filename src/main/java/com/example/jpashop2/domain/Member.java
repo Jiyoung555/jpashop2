@@ -38,15 +38,14 @@ public class Member {
     //Embdeded: 다른 곳에서 가져온, 컬럼의 묶음
     //Address 클래스의 내부 변수들이 합쳐져서 삽입됨 (city, address, zipcode)
 
-    @OneToMany(mappedBy = "member")
+    @OneToMany(mappedBy = "member") //CASCADE는?
     private List<Order> orders = new ArrayList<>();
     //여기는 주인이 아님. 따라서 FK는 주인 Order에 추가한 member에서 관리하겠다
 
     @OneToMany(mappedBy = "member")
     private List<Cart> carts = new ArrayList<>();
 
-    //추가중..
-    @OneToMany(mappedBy = "member") //cascade는??
+    @OneToMany(mappedBy = "member")
     private List<Talk> talks = new ArrayList<>();
 
 

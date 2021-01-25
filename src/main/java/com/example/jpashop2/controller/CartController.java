@@ -27,11 +27,6 @@ public class CartController {
     @GetMapping("/member/cart")
     public String cartList(Model model, HttpSession httpSession){
         //Security 설정후 -> 로그인 세션은 loginEmail만 등록됨
-//        Object temp = httpSession.getAttribute("loginId");//로그인 Id
-//        log.info("세션 loginId : " + temp);
-//        Long memberId = Long.valueOf(String.valueOf(temp));//Object -> Long 타입변환
-//        log.info("memberId : " + memberId);
-//        Member loginMember = memberService.findOne(memberId);//로그인 Member
 
         //**Security 등록으로 인해, 이렇게 수정함
         String loginEmail = (String) httpSession.getAttribute("loginEmail");//로그인 email

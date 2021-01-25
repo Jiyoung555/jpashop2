@@ -28,6 +28,7 @@ public class OrderApiController {
     private final MemberService memberService;
     private final PaymentService paymentService;
 
+    //테스트..
     @PostMapping("/payment/price") //RequestBody는 POST 방식일 때만 값 받아올 수 있음
     public String paymentPrice(@RequestBody PaymentDTO paymentDTO, HttpSession session){
         int amount = paymentDTO.getAmount();
@@ -41,6 +42,41 @@ public class OrderApiController {
         return "redirect:/store";
     }
 
+    @PostMapping("/api/payment")
+    public Long orderPayment(@RequestBody OrderForm form, HttpSession httpSession){
+
+        String memberEmail = (String) httpSession.getAttribute("loginEmail");
+        log.info("로그인 이메일 세션 : " + memberEmail);
+
+        log.info("form : " + form.toString());
+
+        List<Long> itemIdArr = new ArrayList<>();//**
+        List<Integer> countArr = new ArrayList<>();//**
+
+        Member member = memberService.findByEmail(memberEmail);
+        Long memberId = member.getId();
+
+        Long itemId = form.getItemId();
+        int count = form.getCount();
+
+        itemIdArr.add(itemId);
+        countArr.add(count);
+
+        //**payment
+        String imp_uid = form.getImp_uid();//고유ID
+        String merchant_uid = form.getMerchant_uid();//상점 거래 ID
+        Long apply_num = form.getApply_num();//카드 승인번호
+        int amount = form.getAmount();//결제 금액
+        log.info("고유ID : " + imp_uid);
+        log.info("상점 거래 ID : " + merchant_uid);
+        log.info("카드 승인번호 : " + apply_num);
+        log.info("결제 금액 : " + amount);
+        Payment payment = form.toPayment();
+
+        return orderService.payment(memberId, itemIdArr, countArr, payment);
+    }
+
+
 
     @PostMapping("/api/order")
     public String insertOrder(@RequestBody OrderForm form, HttpSession httpSession){
@@ -48,10 +84,10 @@ public class OrderApiController {
         String memberEmail = (String) httpSession.getAttribute("loginEmail");
         log.info("로그인 이메일 세션 : " + memberEmail);
 
-        if(memberEmail == null) { //null값은 ==로. equals로 하면 에러
-            //return "redirect:/login";
-            return "LOGIN";
-        }
+//        if(memberEmail == null) { //null값은 ==로. equals로 하면 에러
+//            //return "redirect:/login";
+//            return "LOGIN";
+//        }
 
         log.info("form : " + form.toString());
 
@@ -63,6 +99,7 @@ public class OrderApiController {
 
         Member member = memberService.findByEmail(memberEmail);
         Long memberId = member.getId();
+
         Long itemId = form.getItemId();
         int count = form.getCount();
 
@@ -73,6 +110,8 @@ public class OrderApiController {
         Long result = orderService.order(memberId, itemIdArr, countArr);
         log.info("결과값 : " + result); //order_id값 리턴함
         return "SUCCESS";
+
+        //return orderService.order(memberId, itemIdArr, countArr);
     }
 
     @DeleteMapping("/api/order/{orderId}")
@@ -170,12 +209,12 @@ public class OrderApiController {
     }
 
 
-//    @PostMapping("/api/orderSearch")
-//    public void orderSearch(@RequestBody OrderSearch orderSearch){
-//        log.info("검색값 : " + orderSearch.getSearchType(), orderSearch.getSearchKeyword());
-//        List<Order> orders = orderService.findOrdersBySearch(orderSearch);
-//        log.info("결과값 : " + orders);
-//    }
+    @PostMapping("/api/orderSearch")
+    public void orderSearch(@RequestBody OrderSearch orderSearch){
+        log.info("검색값 : " + orderSearch.getSearchType(), orderSearch.getSearchKeyword());
+        List<Order> orders = orderService.findOrdersBySearch(orderSearch);
+        log.info("결과값 : " + orders);
+    }
 
 
 

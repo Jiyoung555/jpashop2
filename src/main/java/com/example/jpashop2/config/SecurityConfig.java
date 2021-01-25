@@ -22,8 +22,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     PrincipalDetailsService principalDetailsService;
 
-    @Autowired
-    UserRepository userRepository; //테스트..
+//    @Autowired
+//    UserRepository userRepository; //테스트..
 
     //암호화 방식 빈(Bean) 생성
     @Bean
@@ -55,7 +55,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .loginProcessingUrl("/loginAuth") // 로그인이 실제 이루어지는 곳...
                 .usernameParameter("email") //**
                 //.passwordParameter("")
-                .successHandler(new MyLoginSuccessHandler(userRepository)) //***파라미터 넣어 테스트중..
+                .successHandler(new MyLoginSuccessHandler())
+                //.successHandler(new MyLoginSuccessHandler(userRepository))
+                //**userRepository를 파라미터 넣어야 -> MyLoginSuccessHandler에서 userRepository를 Autowired로 받아올 수 있음
+                //**필요없어서, 파라미터 지금 없앴음
                 //.defaultSuccessUrl("/cart") //로그인 성공시 이동할 페이지 (임시로 카트페이지)
                 .permitAll();
 

@@ -19,6 +19,13 @@ var store = {
     },
 
     cart: function() {
+        var member_email = document.querySelector('#member_email').value;
+        console.log(member_email);
+        if(member_email == "") {
+              alert('로그인이 필요합니다.');
+              window.location.href='/login';
+        }
+
         var data = {
           itemId: document.querySelector('#item_id').value,
           cartCount: document.querySelector('#count').value,
@@ -41,11 +48,11 @@ var store = {
 
                     if(aaa == 'UPDATED') {
                       alert('카트 내 동일 상품의 수량이 추가되었습니다.');
-                      window.location.href='/cart';
+                      window.location.href='/member/cart';
                     }
                     if(aaa == 'CARTED') {
                       alert('카트 담기 성공');
-                      window.location.href='/cart';
+                      window.location.href='/member/cart';
                     }
                     if(aaa == 'FAILED') {
                       alert('카트 담기 실패. 다시 시도해 주세요.');
@@ -53,7 +60,7 @@ var store = {
                     }
 
                     if(aaa == 'LOGIN') {
-                      alert('로그인 먼저 해주세요.');
+                      alert('로그인이 필요합니다.');
                       window.location.href='/login';
                     }
                 })
@@ -67,6 +74,13 @@ var store = {
 
 
     order: function() {
+        var member_email = document.querySelector('#member_email').value;
+        console.log(member_email);
+        if(member_email == "") {
+              alert('로그인이 필요합니다.');
+              window.location.href='/login';
+        }
+
         var data = { //form 데이터를 JSON으로 만듬
           itemId: document.querySelector('#item_id').value,
           count: document.querySelector('#count').value,
@@ -80,26 +94,19 @@ var store = {
           }
         }).then(function(response) {
 
-//          if (response.ok) {
-//            alert('주문 성공');
-//            window.location.href='/order';
-//          } else {
-//            alert('주문 실패');
-//          }
-
             if (response.ok) {
                 response.text().then(function(aaa){
                     console.log(aaa);
 
                     if(aaa == 'SUCCESS') {
                       alert('주문 성공.');
-                      window.location.href='/order';
+                      window.location.href='/member/order';
                     }
 
-                    if(aaa == 'LOGIN') {
-                      alert('로그인 먼저 해주세요.');
-                      window.location.href='/login';
-                    }
+//                    if(aaa == 'LOGIN') {
+//                      alert('로그인이 필요합니다.');
+//                      window.location.href='/login';
+//                    }
 
                 })
 
@@ -111,6 +118,13 @@ var store = {
     },
 
     checkOrder: function() {
+        var member_email = document.querySelector('#member_email').value;
+        console.log(member_email);
+        if(member_email == "") {
+              alert('로그인이 필요합니다.');
+              window.location.href='/login';
+        }
+
         var itemIds = document.getElementsByName("checkbox");
         var itemIdArr = new Array(); //**
 
@@ -151,7 +165,7 @@ var store = {
 
                     if(aaa == 'SUCCESS') {
                       alert('주문 성공.');
-                      window.location.href='/order';
+                      window.location.href='/member/order';
                     }
 
                     if(aaa == 'LOGIN') {

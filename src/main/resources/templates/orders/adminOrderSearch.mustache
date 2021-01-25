@@ -7,19 +7,20 @@
 
 
 <!-- 검색 화면 -->
-<div>
-    <form method="post" action="/admin/orderSearch"> <!--js없이-->
-        <select id="searchType" name="searchType">
-            <option value="">검색조건</option>
-            <option value="member_name">회원이름</option>
-            <option value="orderStatus">주문상태</option>
+<!-- 검색 화면 -->
+<div id="adminOrderList_search_1">
+    <form method="post" action="/admin/orderSearchTop"> <!--js없이-->
+        <select name="orderStatus">
+            <option value="">주문상태</option>
+            <option value="ordered">ORDERED</option>
+            <option value="canceled">CANCELED</option>
+            <option value="paid">PAID</option>
         </select>
 
-        <input class="form-control" type="text" id="searchKeyword" name="searchKeyword"/>
-
-        <button id="orderSearchBtn" type="submit" class="btn btn-primary">검색</button>
+        이름 : <input type="text" name="memberName"/>
+        이메일 : <input type="text" name="memberEmail"/>
+        <button id="orderSearchBtnTest" type="submit">검색</button>
     </form>
-
 </div>
 
 <!-- 테이블-->
@@ -57,6 +58,20 @@
         {{/searchOrderDetail}}
         </tbody>
     </table>
+</div>
+
+<!--검색2-->
+<div id="adminOrderList_search_2">
+    <form method="post" action="/admin/orderSearch"> <!--js없이-->
+        <select name="searchType"> <!--id="searchType"-->
+            <option value="">검색조건</option>
+            <option value="member_name">회원이름</option>
+            <option value="orderStatus">주문상태</option>
+        </select>
+
+        <input type="text" name="searchKeyword"/> <!--id="searchKeyword"-->
+        <button id="orderSearchBtn" type="submit">검색</button>
+    </form>
 </div>
 
 

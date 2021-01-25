@@ -27,9 +27,11 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class MyLoginSuccessHandler implements AuthenticationSuccessHandler {
 
-    @Autowired
-    final UserRepository userRepository;
-    //final로 하니, SecurityConfig에서 new MyLoginSuccessHandler()할 때 에러남
+//    @Autowired
+//    final UserRepository userRepository;
+//    //final로 하니, SecurityConfig에서 new MyLoginSuccessHandler()할 때 에러남
+//    //이거 사용하려면, SecurityConfig에서에서 new MyLoginSuccessHandler()에 파라미터 수정하기
+
 
     @Autowired
     MemberService memberService;
@@ -51,8 +53,8 @@ public class MyLoginSuccessHandler implements AuthenticationSuccessHandler {
         Object principal = authentication.getPrincipal(); //PrincipalDetails 타입
         log.info("principal : " + principal);
 
+        //**member 테이블의 orders, carts, talks를 못 가져옴.. (아마 lazy 때문..)
         //Optional<Member> member = userRepository.findByEmail(email);
-        //member 테이블의 orders, carts를 못 가져오네.. (아마 lazy로 적어놔서 그런 듯..)
         //log.info("member 찾았니 : " + member);
         //session.setAttribute("loginId", member.getId());
         //session.setAttribute("loginMember", member);

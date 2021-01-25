@@ -40,7 +40,7 @@ var order = {
       }).then(function(response) {
         if (response.ok) {
           alert('카트에서 삭제하였습니다');
-          window.location.href='/cart';
+          window.location.href='/admin/cart';
         } else {
           alert('카트 삭제 실패');
         }
@@ -57,7 +57,7 @@ var order = {
       }).then(function(response) {
         if (response.ok) {
           alert('주문을 취소하였습니다');
-          window.location.href='/order';
+          window.location.href='/admin/order';
         } else {
           alert('주문 삭제 실패');
         }
@@ -83,11 +83,11 @@ var order = {
                     console.log(aaa);
                     if(aaa == 'success') {
                       alert('장바구니 상품 -> 주문 성공.');
-                      window.location.href='/order';
+                      window.location.href='/admin/order';
                     }
                     if(aaa == 'fail') {
                       alert('주문 실패. 다시 시도해주세요.');
-                      window.location.href='/cart';
+                      window.location.href='/admin/cart';
                     }
                 })
             } else {
@@ -153,7 +153,7 @@ var order = {
 
               if (response.ok) {
                 alert('주문 성공');
-                window.location.href='/order';
+                window.location.href='/admin/order';
               } else {
                 alert('주문 실패');
               }

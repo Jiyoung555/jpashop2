@@ -74,6 +74,14 @@
                 </div>
                 {{/itemList}}
 
+                {{#loginEmail}} <!--로그인 여부. 따로 세션 등록 안해도 됨. 이미 되어 있음-->
+                    <input type="hidden" id="member_email" value="{{loginEmail}}">
+                {{/loginEmail}}
+
+                {{^loginEmail}}
+                    <input type="hidden" id="member_email" value="">
+                {{/loginEmail}}
+
             </div> <!-- 1줄 row 끝-->
             </form>
 

@@ -97,4 +97,57 @@ public class OrderRepository {
 
     }
 
+    //검색 테스트
+    public List<Order> findAllBySearchTop(OrderSearch orderSearch) {
+        String orderStatus = orderSearch.getOrderStatus(); //ordered 소문자로 오네..
+        orderStatus = orderStatus.toUpperCase();//대문자 처리해야 검색됨
+        String memberName = orderSearch.getMemberName();
+        String memberEmail = orderSearch.getMemberEmail();
+
+        List<Order> orders = new ArrayList<>();
+
+        if(orderStatus.equals("ORDERED")) {
+            orders = em.createQuery("select o from Order o" +
+                    " join o.member m " +
+                    " where o.status = :status " +
+                    " and m.name like :name " +
+                    " and m.email like :email", Order.class)
+                    .setParameter("status", OrderStatus.ORDERED)
+                    .setParameter("name", memberName)
+                    .setParameter("email", memberEmail)
+                    .getResultList();
+
+        } else if(orderStatus.equals("CANCELED")) {
+            orders = em.createQuery("select o from Order o" +
+                    " join o.member m " +
+                    " where o.status = :status " +
+                    " and m.name like :name " +
+                    " and m.email like :email", Order.class)
+                    .setParameter("status", OrderStatus.CANCELED)
+                    .setParameter("name", memberName)
+                    .setParameter("email", memberEmail)
+                    .getResultList();
+
+        } else if(orderStatus.equals("PAID")) {
+            orders = em.createQuery("select o from Order o" +
+                    " join o.member m " +
+                    " where o.status = :status " +
+                    " and m.name like :name " +
+                    " and m.email like :email", Order.class)
+                    .setParameter("status", OrderStatus.PAID)
+                    .setParameter("name", memberName)
+                    .setParameter("email", memberEmail)
+                    .getResultList();
+        }
+
+
+
+        System.out.println("orders : " + orders);
+        return orders;
+    }
+
+
+
+
+
 }

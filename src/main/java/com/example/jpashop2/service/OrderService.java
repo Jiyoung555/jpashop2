@@ -18,17 +18,39 @@ public class OrderService {
     private final ItemRepository itemRepository;
     private final CartRepository cartRepository;
 
+    @Transactional //Order주문 + Payment결제
+    public Long payment(Long memberId, List<Long> itemIdArr, List<Integer> countArr, Payment payment) {
+        Member member = memberRepository.findOne(memberId);
+        List<Item> itemArr = new ArrayList<>();//아이템들
+        List<OrderItem> orderItemArr = new ArrayList<>();//OrderItem 여러개
+
+        for(int i = 0; i <itemIdArr.size(); i++){
+            Item item = itemRepository.findOne(itemIdArr.get(i));
+            itemArr.add(item);
+
+            OrderItem orderItem = OrderItem.createOrderItem(item, item.getPrice(), countArr.get(i));
+            orderItemArr.add(orderItem);
+        }
+
+        //Delivery 배송정보 생성
+        Delivery delivery = new Delivery();
+        delivery.setAddress((member.getAddress())); //회원 주소로 배송하기
+        delivery.setStatus(DeliveryStatus.READY); //**내가 추가함
+
+        //Order 주문 생성
+        Order order = Order.createOrderPayment(member, delivery, orderItemArr, payment);
+
+        //Order 주문 저장
+        return orderRepository.save(order);
+
+    }
+
     //Order 주문하기 (**item 여러개 주문하도록 내가 수정함)
     @Transactional
     public Long order(Long memberId, List<Long> itemIdArr, List<Integer> countArr) {
         Member member = memberRepository.findOne(memberId);
         List<Item> itemArr = new ArrayList<>();//아이템들
         List<OrderItem> orderItemArr = new ArrayList<>();//OrderItem 여러개
-//        //**항상 item 1개만 주문하는 경우의 코드
-//        //OrderItem 주문상품 "먼저" 생성(Order 주문을 위해, Item 상품 먼저 셋팅
-//        Item item = itemRepository.findOne(itemId);
-//        OrderItem orderItem = OrderItem.createOrderItem(item, item.getPrice(), count);
-//        orderItemArr.add(orderItem);//1개만..
 
         for(int i = 0; i <itemIdArr.size(); i++){
             Item item = itemRepository.findOne(itemIdArr.get(i));
@@ -132,12 +154,6 @@ public class OrderService {
     }
 
 
-//        //사용x
-//        //@Transactional(readOnly = true)//위로 뺌
-//        public List<Order> findMyOrders(Long memberId){
-//            List<Order> myOrderList = orderRepository.findByMemberId(memberId);
-//            return myOrderList;
-//        }
 
 
     //@Transactional(readOnly = true)//위로 뺌
@@ -152,10 +168,23 @@ public class OrderService {
         return orderRepository.findAll();
     }
 
+
     //[참고] Order 주문 검색
     public List<Order> findOrdersBySearch(OrderSearch orderSearch) {//메소드명 findOrders에서 바꿈
         return orderRepository.findAllBySearch(orderSearch);
     }
 
+    public List<Order> findOrdersBySearchTop(OrderSearch orderSearch) {
+        System.out.println("1. 여기로 오나요?");
+        return orderRepository.findAllBySearchTop(orderSearch);
+    }
+
+
+//        //사용x
+//        //@Transactional(readOnly = true)//위로 뺌
+//        public List<Order> findMyOrders(Long memberId){
+//            List<Order> myOrderList = orderRepository.findByMemberId(memberId);
+//            return myOrderList;
+//        }
 
 }

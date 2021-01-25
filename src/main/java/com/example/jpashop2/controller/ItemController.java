@@ -3,6 +3,7 @@ import com.example.jpashop2.domain.*;
 import com.example.jpashop2.dto.ItemForm;
 import com.example.jpashop2.service.CategoryService;
 import com.example.jpashop2.service.ItemService;
+import com.example.jpashop2.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 @Slf4j
@@ -22,6 +25,7 @@ import java.io.IOException;
 public class ItemController {
     private final ItemService itemService;
     private final CategoryService categoryService;
+    private  final MemberService memberService;
 
     //storeForm 페이지
     @GetMapping("/admin/storeForm")
@@ -137,17 +141,27 @@ public class ItemController {
 
 
     @GetMapping("/store")
-    public String storeList(Model model){
+    public String storeList(Model model, HttpSession session){
         Iterable<Item> itemList = itemService.findItems();
         model.addAttribute("itemList", itemList);
+
+        //String loginEmail = (String) session.getAttribute("loginEmail");
+        //model.addAttribute("loginEmail", loginEmail);//로그인시 이미 등록된 세션임. 중복 추가 하지 말기
         return "stores/store";
     }
 
     //상품 상세보기
     @GetMapping("/store/{id}")
-    public String adminStoreShow(@PathVariable Long id, Model model){
+    public String adminStoreShow(@PathVariable Long id, Model model, HttpSession session){
         Item item = itemService.findOne(id);
         model.addAttribute("item", item);
+
+        String loginEmail = (String) session.getAttribute("loginEmail");
+        Member member = memberService.findByEmail(loginEmail);
+        //Long memberId = member.getId();
+        //model.addAttribute("loginId", memberId);
+        model.addAttribute("member", member);
+
         return "stores/storeShow";
     }
 
